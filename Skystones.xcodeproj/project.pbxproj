@@ -8,17 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		5B2089AD2C9E69D80064028E /* SkystonesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089AC2C9E69D80064028E /* SkystonesApp.swift */; };
-		5B2089AF2C9E69D80064028E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089AE2C9E69D80064028E /* ContentView.swift */; };
 		5B2089B12C9E69D90064028E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089B02C9E69D90064028E /* Assets.xcassets */; };
 		5B2089B42C9E69D90064028E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089B32C9E69D90064028E /* Preview Assets.xcassets */; };
+		5B2089BB2C9E6B2D0064028E /* GameBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089BA2C9E6B2D0064028E /* GameBoardView.swift */; };
+		5B2089BD2C9E6D210064028E /* SkystoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089BC2C9E6D210064028E /* SkystoneView.swift */; };
+		5B2089BF2C9E71CA0064028E /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089BE2C9E71CA0064028E /* GameViewModel.swift */; };
+		5B2089C12C9E74E00064028E /* EmptyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089C02C9E74E00064028E /* EmptyCellView.swift */; };
+		5B2089C32C9E75680064028E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089C22C9E75680064028E /* MainView.swift */; };
+		5B2089C52C9F5EC80064028E /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089C42C9F5EC80064028E /* GameModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5B2089A92C9E69D80064028E /* Skystones.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skystones.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B2089AC2C9E69D80064028E /* SkystonesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkystonesApp.swift; sourceTree = "<group>"; };
-		5B2089AE2C9E69D80064028E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5B2089B02C9E69D90064028E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B2089B32C9E69D90064028E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5B2089BA2C9E6B2D0064028E /* GameBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardView.swift; sourceTree = "<group>"; };
+		5B2089BC2C9E6D210064028E /* SkystoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkystoneView.swift; sourceTree = "<group>"; };
+		5B2089BE2C9E71CA0064028E /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		5B2089C02C9E74E00064028E /* EmptyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCellView.swift; sourceTree = "<group>"; };
+		5B2089C22C9E75680064028E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		5B2089C42C9F5EC80064028E /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +62,12 @@
 			isa = PBXGroup;
 			children = (
 				5B2089AC2C9E69D80064028E /* SkystonesApp.swift */,
-				5B2089AE2C9E69D80064028E /* ContentView.swift */,
+				5B2089C22C9E75680064028E /* MainView.swift */,
+				5B2089C02C9E74E00064028E /* EmptyCellView.swift */,
+				5B2089BC2C9E6D210064028E /* SkystoneView.swift */,
+				5B2089C42C9F5EC80064028E /* GameModel.swift */,
+				5B2089BA2C9E6B2D0064028E /* GameBoardView.swift */,
+				5B2089BE2C9E71CA0064028E /* GameViewModel.swift */,
 				5B2089B02C9E69D90064028E /* Assets.xcassets */,
 				5B2089B22C9E69D90064028E /* Preview Content */,
 			);
@@ -137,8 +152,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B2089AF2C9E69D80064028E /* ContentView.swift in Sources */,
+				5B2089BF2C9E71CA0064028E /* GameViewModel.swift in Sources */,
+				5B2089C32C9E75680064028E /* MainView.swift in Sources */,
+				5B2089C12C9E74E00064028E /* EmptyCellView.swift in Sources */,
+				5B2089BD2C9E6D210064028E /* SkystoneView.swift in Sources */,
 				5B2089AD2C9E69D80064028E /* SkystonesApp.swift in Sources */,
+				5B2089C52C9F5EC80064028E /* GameModel.swift in Sources */,
+				5B2089BB2C9E6B2D0064028E /* GameBoardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
