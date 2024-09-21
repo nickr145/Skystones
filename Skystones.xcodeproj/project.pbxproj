@@ -62,12 +62,9 @@
 			isa = PBXGroup;
 			children = (
 				5B2089AC2C9E69D80064028E /* SkystonesApp.swift */,
-				5B2089C22C9E75680064028E /* MainView.swift */,
-				5B2089C02C9E74E00064028E /* EmptyCellView.swift */,
-				5B2089BC2C9E6D210064028E /* SkystoneView.swift */,
-				5B2089C42C9F5EC80064028E /* GameModel.swift */,
-				5B2089BA2C9E6B2D0064028E /* GameBoardView.swift */,
-				5B2089BE2C9E71CA0064028E /* GameViewModel.swift */,
+				5B2089C82C9F7E4C0064028E /* ViewModels */,
+				5B2089C72C9F7E440064028E /* Models */,
+				5B2089C62C9F7E3C0064028E /* Views */,
 				5B2089B02C9E69D90064028E /* Assets.xcassets */,
 				5B2089B22C9E69D90064028E /* Preview Content */,
 			);
@@ -80,6 +77,33 @@
 				5B2089B32C9E69D90064028E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5B2089C62C9F7E3C0064028E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5B2089C22C9E75680064028E /* MainView.swift */,
+				5B2089C02C9E74E00064028E /* EmptyCellView.swift */,
+				5B2089BC2C9E6D210064028E /* SkystoneView.swift */,
+				5B2089BA2C9E6B2D0064028E /* GameBoardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5B2089C72C9F7E440064028E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5B2089C42C9F5EC80064028E /* GameModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5B2089C82C9F7E4C0064028E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5B2089BE2C9E71CA0064028E /* GameViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
