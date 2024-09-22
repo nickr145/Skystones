@@ -11,15 +11,28 @@ struct MainView: View {
     @StateObject var viewModel = GameViewModel()  // Assuming GameViewModel is in its own file
     
     var body: some View {
-        NavigationView { 
-            GameBoardView(viewModel: viewModel)  // Using GameBoardView with the view model
+        ZStack {
+            Color.black
+            // GIF background stretched to all edges
+            GIFView(gifName: "BoardBG")
+                .scaledToFit()
+                .ignoresSafeArea(.all)
+                
+            
+            // Main game content
+            GameBoardView(viewModel: viewModel)
                 .navigationTitle("Skystones")
                 .padding()
+                .background(Color.clear)  // Ensure transparency for the background
         }
+        .ignoresSafeArea(.all)
     }
 }
 
 #Preview {
     MainView()
 }
+
+
+
 

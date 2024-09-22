@@ -15,7 +15,7 @@ struct EmptyCellView: View {
         Rectangle()
             .foregroundColor(.gray.opacity(0.2))  // Light gray color for empty cells
             .frame(height: 100)  // Adjust height for design
-            .overlay(Text("\(index)").foregroundColor(.gray))  // Optional: show index for debugging
+            //.overlay(Text("\(index)").foregroundColor(.gray))  // Optional: show index for debugging
             .onTapGesture {
                 onTap()  // Trigger the tap action
             }

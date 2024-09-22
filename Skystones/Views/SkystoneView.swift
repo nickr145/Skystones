@@ -13,15 +13,19 @@ struct SkystoneView: View {
     var body: some View {
         VStack {
             Text("\(skystone.top)").font(.headline)
+                .bold()
             HStack {
                 Text("\(skystone.left)").font(.headline)
+                    .bold()
                 Spacer()
                 Text("\(skystone.right)").font(.headline)
+                    .bold()
             }
             Text("\(skystone.bottom)").font(.headline)
+                .bold()
         }
         .padding()
-        .background(skystone.owner == 1 ? Color.blue.opacity(0.4) : Color.red.opacity(0.4))  // Blue for Player 1, Red for Player 2
+        .background(skystone.owner == 1 ? Color.blue.opacity(0.7) : Color.red.opacity(0.7))  // Blue for Player 1, Red for Player 2
         .cornerRadius(10)
     }
 }
