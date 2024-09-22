@@ -49,7 +49,6 @@
 		5B2089A02C9E69D80064028E = {
 			isa = PBXGroup;
 			children = (
-				5B2089CC2C9FE1040064028E /* BoardBG.gif */,
 				5B2089AB2C9E69D80064028E /* Skystones */,
 				5B2089AA2C9E69D80064028E /* Products */,
 			);
@@ -71,6 +70,7 @@
 				5B2089C72C9F7E440064028E /* Models */,
 				5B2089C62C9F7E3C0064028E /* Views */,
 				5B2089B02C9E69D90064028E /* Assets.xcassets */,
+				5B2089CC2C9FE1040064028E /* BoardBG.gif */,
 				5B2089B22C9E69D90064028E /* Preview Content */,
 			);
 			path = Skystones;
