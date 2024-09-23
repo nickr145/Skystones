@@ -11,7 +11,7 @@ import SwiftUI
 struct SkystonesApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            TitleView()
         }
     }
 }

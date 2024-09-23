@@ -13,11 +13,12 @@
 		5B2089BD2C9E6D210064028E /* SkystoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089BC2C9E6D210064028E /* SkystoneView.swift */; };
 		5B2089BF2C9E71CA0064028E /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089BE2C9E71CA0064028E /* GameViewModel.swift */; };
 		5B2089C12C9E74E00064028E /* EmptyCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089C02C9E74E00064028E /* EmptyCellView.swift */; };
-		5B2089C32C9E75680064028E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089C22C9E75680064028E /* MainView.swift */; };
 		5B2089C52C9F5EC80064028E /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089C42C9F5EC80064028E /* GameModel.swift */; };
 		5B2089CA2C9FDFCB0064028E /* GIFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089C92C9FDFCA0064028E /* GIFView.swift */; };
 		5B2089CB2C9FE0930064028E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089B02C9E69D90064028E /* Assets.xcassets */; };
 		5B2089CD2C9FE1040064028E /* BoardBG.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089CC2C9FE1040064028E /* BoardBG.gif */; };
+		5B2089D12CA0F4310064028E /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089D02CA0F4310064028E /* TitleView.swift */; };
+		5B2089D32CA11A3B0064028E /* PVPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089D22CA11A3B0064028E /* PVPView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,10 +30,11 @@
 		5B2089BC2C9E6D210064028E /* SkystoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkystoneView.swift; sourceTree = "<group>"; };
 		5B2089BE2C9E71CA0064028E /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		5B2089C02C9E74E00064028E /* EmptyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCellView.swift; sourceTree = "<group>"; };
-		5B2089C22C9E75680064028E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5B2089C42C9F5EC80064028E /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		5B2089C92C9FDFCA0064028E /* GIFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFView.swift; sourceTree = "<group>"; };
 		5B2089CC2C9FE1040064028E /* BoardBG.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = BoardBG.gif; sourceTree = "<group>"; };
+		5B2089D02CA0F4310064028E /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		5B2089D22CA11A3B0064028E /* PVPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVPView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,11 +89,12 @@
 		5B2089C62C9F7E3C0064028E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5B2089C22C9E75680064028E /* MainView.swift */,
+				5B2089D22CA11A3B0064028E /* PVPView.swift */,
 				5B2089C02C9E74E00064028E /* EmptyCellView.swift */,
 				5B2089BC2C9E6D210064028E /* SkystoneView.swift */,
 				5B2089BA2C9E6B2D0064028E /* GameBoardView.swift */,
 				5B2089C92C9FDFCA0064028E /* GIFView.swift */,
+				5B2089D02CA0F4310064028E /* TitleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -185,9 +188,10 @@
 			files = (
 				5B2089BF2C9E71CA0064028E /* GameViewModel.swift in Sources */,
 				5B2089CA2C9FDFCB0064028E /* GIFView.swift in Sources */,
-				5B2089C32C9E75680064028E /* MainView.swift in Sources */,
+				5B2089D32CA11A3B0064028E /* PVPView.swift in Sources */,
 				5B2089C12C9E74E00064028E /* EmptyCellView.swift in Sources */,
 				5B2089BD2C9E6D210064028E /* SkystoneView.swift in Sources */,
+				5B2089D12CA0F4310064028E /* TitleView.swift in Sources */,
 				5B2089AD2C9E69D80064028E /* SkystonesApp.swift in Sources */,
 				5B2089C52C9F5EC80064028E /* GameModel.swift in Sources */,
 				5B2089BB2C9E6B2D0064028E /* GameBoardView.swift in Sources */,

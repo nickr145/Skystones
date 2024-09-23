@@ -1,5 +1,5 @@
 //
-//  MainView.swift
+//  PVPView.swift
 //  Skystones
 //
 //  Created by Nicholas Rebello on 2024-09-20.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct PVPView: View {
     @StateObject var viewModel = GameViewModel()  // Assuming GameViewModel is in its own file
     
     var body: some View {
@@ -30,7 +30,7 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+    PVPView()
 }
 
 
