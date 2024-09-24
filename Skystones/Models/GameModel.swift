@@ -14,7 +14,6 @@ struct Skystone {
     var left: Int
     var owner: Int
 
-    // Method to determine if the current stone can capture an adjacent stone
     func canCapture(_ adjacentStone: Skystone, direction: Direction) -> Bool {
         switch direction {
         case .top:

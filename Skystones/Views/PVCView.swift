@@ -26,14 +26,14 @@ struct PVCView: View {
         .ignoresSafeArea()
         .onChange(of: viewModel.currentPlayer) { newPlayer in
             if newPlayer == 2 {
-                performLvl1ComputerMove()  // Automatically let the computer make a move
+                performLvl1ComputerMove()
             }
         }
     }
 
     private func performLvl1ComputerMove() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {  // Delay to simulate thinking time
-            viewModel.Lvl1ComputerMove()  // Add logic in GameViewModel for computer moves
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            viewModel.Lvl1ComputerMove()
         }
     }
 }

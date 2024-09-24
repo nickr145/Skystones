@@ -42,10 +42,10 @@ struct TitleView: View {
         }
         .padding()
         .fullScreenCover(isPresented: $showPVPView) {
-            PVPView()  // Present PVPView when the button is tapped
+            PVPView()
         }
         .fullScreenCover(isPresented: $showPVCView) {
-            PVCView()  // Present PVPView when the button is tapped
+            PVCView() 
         }
     }
 }

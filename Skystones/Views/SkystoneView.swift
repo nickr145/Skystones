@@ -25,7 +25,8 @@ struct SkystoneView: View {
                 .bold()
         }
         .padding()
-        .background(skystone.owner == 1 ? Color.blue.opacity(0.7) : Color.red.opacity(0.7))  // Blue for Player 1, Red for Player 2
+        // Blue for Player 1, Red for Player 2
+        .background(skystone.owner == 1 ? Color.blue.opacity(0.7) : Color.red.opacity(0.7))
         .cornerRadius(10)
     }
 }

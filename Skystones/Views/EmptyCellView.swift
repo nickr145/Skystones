@@ -9,15 +9,14 @@ import SwiftUI
 
 struct EmptyCellView: View {
     var index: Int
-    var onTap: () -> Void  // Closure to handle tap action
+    var onTap: () -> Void 
     
     var body: some View {
         Rectangle()
-            .foregroundColor(.gray.opacity(0.2))  // Light gray color for empty cells
-            .frame(height: 100)  // Adjust height for design
-            //.overlay(Text("\(index)").foregroundColor(.gray))  // Optional: show index for debugging
+            .foregroundColor(.gray.opacity(0.2))
+            .frame(height: 100)
             .onTapGesture {
-                onTap()  // Trigger the tap action
+                onTap()
             }
     }
 }
