@@ -19,6 +19,7 @@
 		5B2089CD2C9FE1040064028E /* BoardBG.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089CC2C9FE1040064028E /* BoardBG.gif */; };
 		5B2089D12CA0F4310064028E /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089D02CA0F4310064028E /* TitleView.swift */; };
 		5B2089D32CA11A3B0064028E /* PVPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089D22CA11A3B0064028E /* PVPView.swift */; };
+		5B2089D52CA24AB20064028E /* PVCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089D42CA24AB20064028E /* PVCView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		5B2089CC2C9FE1040064028E /* BoardBG.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = BoardBG.gif; sourceTree = "<group>"; };
 		5B2089D02CA0F4310064028E /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		5B2089D22CA11A3B0064028E /* PVPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVPView.swift; sourceTree = "<group>"; };
+		5B2089D42CA24AB20064028E /* PVCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVCView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				5B2089BA2C9E6B2D0064028E /* GameBoardView.swift */,
 				5B2089C92C9FDFCA0064028E /* GIFView.swift */,
 				5B2089D02CA0F4310064028E /* TitleView.swift */,
+				5B2089D42CA24AB20064028E /* PVCView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				5B2089C12C9E74E00064028E /* EmptyCellView.swift in Sources */,
 				5B2089BD2C9E6D210064028E /* SkystoneView.swift in Sources */,
 				5B2089D12CA0F4310064028E /* TitleView.swift in Sources */,
+				5B2089D52CA24AB20064028E /* PVCView.swift in Sources */,
 				5B2089AD2C9E69D80064028E /* SkystonesApp.swift in Sources */,
 				5B2089C52C9F5EC80064028E /* GameModel.swift in Sources */,
 				5B2089BB2C9E6B2D0064028E /* GameBoardView.swift in Sources */,

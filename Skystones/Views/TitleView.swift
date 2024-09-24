@@ -45,7 +45,7 @@ struct TitleView: View {
             PVPView()  // Present PVPView when the button is tapped
         }
         .fullScreenCover(isPresented: $showPVCView) {
-            PVPView()  // Present PVPView when the button is tapped
+            PVCView()  // Present PVPView when the button is tapped
         }
     }
 }

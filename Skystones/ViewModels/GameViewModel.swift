@@ -13,6 +13,13 @@ class GameViewModel: ObservableObject {
     @Published var isGameOver: Bool = false
     @Published var winner: Int?  // Tracks the winner
     
+    func Lvl1ComputerMove() {
+        let availableCells = board.indices.filter { board[$0] == nil }
+        if let randomCell = availableCells.randomElement() {
+            placeStone(at: randomCell)
+        }
+    }
+    
     // Place a stone on the board and check captures
     func placeStone(at index: Int) {
         guard board[index] == nil else { return }  // Ensure the spot is free
