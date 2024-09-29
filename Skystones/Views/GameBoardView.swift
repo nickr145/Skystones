@@ -17,8 +17,6 @@ struct GameBoardView: View {
 
     var body: some View {
         VStack {
-            // Piece Selection
-            PieceSelectionView(viewModel: viewModel)
             
             // Board Grid
             LazyVGrid(columns: columns, spacing: 10) {
@@ -46,6 +44,8 @@ struct GameBoardView: View {
                     }
                 )
             }
+            // Piece Selection
+            PieceSelectionView(viewModel: viewModel)
         }
     }
 }
