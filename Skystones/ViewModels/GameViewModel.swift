@@ -114,6 +114,20 @@ class GameViewModel: ObservableObject {
     
     func resetGame() {
         board = Array(repeating: nil, count: 9)
+        player1Pieces = [
+            Skystone(top: 2, right: 3, bottom: 1, left: 4, owner: 1),
+            Skystone(top: 3, right: 4, bottom: 2, left: 1, owner: 1),
+            Skystone(top: 1, right: 2, bottom: 3, left: 4, owner: 1),
+            Skystone(top: 4, right: 1, bottom: 2, left: 3, owner: 1),
+            Skystone(top: 2, right: 1, bottom: 4, left: 3, owner: 1)
+        ]
+        player2Pieces = [
+            Skystone(top: 1, right: 3, bottom: 2, left: 4, owner: 2),
+            Skystone(top: 2, right: 4, bottom: 3, left: 1, owner: 2),
+            Skystone(top: 4, right: 2, bottom: 1, left: 3, owner: 2),
+            Skystone(top: 3, right: 1, bottom: 4, left: 2, owner: 2),
+            Skystone(top: 1, right: 2, bottom: 4, left: 3, owner: 2)
+        ]
         currentPlayer = 1
         isGameOver = false
         winner = nil
