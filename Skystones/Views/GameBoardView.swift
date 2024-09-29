@@ -16,28 +16,36 @@ struct GameBoardView: View {
     ]
 
     var body: some View {
-        LazyVGrid(columns: columns, spacing: 10) {
-            ForEach(0..<9, id: \.self) { index in
-                Group {
-                    if let skystone = viewModel.board[index] {
-                        SkystoneView(skystone: skystone)
-                    } else {
-                        EmptyCellView(index: index, onTap: {
-                            viewModel.placeStone(at: index)
-                        })
+        VStack {
+            // Piece Selection
+            PieceSelectionView(viewModel: viewModel)
+            
+            // Board Grid
+            LazyVGrid(columns: columns, spacing: 10) {
+                ForEach(viewModel.board.indices, id: \.self) { index in
+                    Group {
+                        if let skystone = viewModel.board[index] {
+                            SkystoneView(skystone: skystone)
+                        } else {
+                            EmptyCellView(index: index, onTap: {
+                                if let selectedPiece = viewModel.selectedPiece {
+                                    viewModel.placeSelectedPiece(at: index)
+                                }
+                            })
+                        }
                     }
                 }
             }
-        }
-        .padding()
-        .alert(isPresented: $viewModel.isGameOver) {
-            Alert(
-                title: Text("Game Over"),
-                message: Text("Player \(viewModel.winner ?? 0) Wins!"),
-                dismissButton: .default(Text("OK")) {
-                    viewModel.resetGame()
-                }
-            )
+            .padding()
+            .alert(isPresented: $viewModel.isGameOver) {
+                Alert(
+                    title: Text("Game Over"),
+                    message: Text("Player \(viewModel.winner ?? 0) Wins!"),
+                    dismissButton: .default(Text("OK")) {
+                        viewModel.resetGame()
+                    }
+                )
+            }
         }
     }
 }
