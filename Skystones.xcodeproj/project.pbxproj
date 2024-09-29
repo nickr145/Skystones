@@ -20,6 +20,7 @@
 		5B2089D12CA0F4310064028E /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089D02CA0F4310064028E /* TitleView.swift */; };
 		5B2089D32CA11A3B0064028E /* PVPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089D22CA11A3B0064028E /* PVPView.swift */; };
 		5B2089D52CA24AB20064028E /* PVCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089D42CA24AB20064028E /* PVCView.swift */; };
+		5B2089DF2CA8FA380064028E /* PieceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089DE2CA8FA380064028E /* PieceSelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		5B2089D02CA0F4310064028E /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		5B2089D22CA11A3B0064028E /* PVPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVPView.swift; sourceTree = "<group>"; };
 		5B2089D42CA24AB20064028E /* PVCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVCView.swift; sourceTree = "<group>"; };
+		5B2089DE2CA8FA380064028E /* PieceSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				5B2089C92C9FDFCA0064028E /* GIFView.swift */,
 				5B2089D02CA0F4310064028E /* TitleView.swift */,
 				5B2089D42CA24AB20064028E /* PVCView.swift */,
+				5B2089DE2CA8FA380064028E /* PieceSelectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				5B2089D32CA11A3B0064028E /* PVPView.swift in Sources */,
 				5B2089C12C9E74E00064028E /* EmptyCellView.swift in Sources */,
 				5B2089BD2C9E6D210064028E /* SkystoneView.swift in Sources */,
+				5B2089DF2CA8FA380064028E /* PieceSelectionView.swift in Sources */,
 				5B2089D12CA0F4310064028E /* TitleView.swift in Sources */,
 				5B2089D52CA24AB20064028E /* PVCView.swift in Sources */,
 				5B2089AD2C9E69D80064028E /* SkystonesApp.swift in Sources */,

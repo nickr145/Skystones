@@ -9,6 +9,28 @@ import Foundation
 
 class GameViewModel: ObservableObject {
     @Published var board: [Skystone?] = Array(repeating: nil, count: 9)
+    @Published var player1Pieces: [Skystone] = [
+        Skystone(top: 2, right: 3, bottom: 1, left: 4, owner: 1),
+        Skystone(top: 3, right: 4, bottom: 2, left: 1, owner: 1),
+        Skystone(top: 1, right: 2, bottom: 3, left: 4, owner: 1),
+        Skystone(top: 4, right: 1, bottom: 2, left: 3, owner: 1),
+        Skystone(top: 2, right: 1, bottom: 4, left: 3, owner: 1)
+    ]
+    @Published var player2Pieces: [Skystone] = [
+        Skystone(top: 1, right: 3, bottom: 2, left: 4, owner: 2),
+        Skystone(top: 2, right: 4, bottom: 3, left: 1, owner: 2),
+        Skystone(top: 4, right: 2, bottom: 1, left: 3, owner: 2),
+        Skystone(top: 3, right: 1, bottom: 4, left: 2, owner: 2),
+        Skystone(top: 1, right: 2, bottom: 4, left: 3, owner: 2)
+    ]
+    @Published var computerPieces: [Skystone] = [
+        Skystone(top: 1, right: 3, bottom: 2, left: 4, owner: 2),
+        Skystone(top: 2, right: 4, bottom: 3, left: 1, owner: 2),
+        Skystone(top: 4, right: 2, bottom: 1, left: 3, owner: 2),
+        Skystone(top: 3, right: 1, bottom: 4, left: 2, owner: 2),
+        Skystone(top: 1, right: 2, bottom: 4, left: 3, owner: 2)
+    ]
+    @Published var selectedPiece: Skystone?
     @Published var currentPlayer: Int = 1
     @Published var isGameOver: Bool = false
     @Published var winner: Int?
@@ -19,6 +41,35 @@ class GameViewModel: ObservableObject {
             placeStone(at: randomCell)
         }
     }
+    
+    func placeSelectedPiece(at index: Int) {
+        guard board[index] == nil, let selectedPiece = selectedPiece else { return }
+        
+        board[index] = selectedPiece
+        captureAdjacentStones(at: index)
+        
+        // Remove the placed piece from the current player's available pieces
+        if currentPlayer == 1 {
+            if let selectedIndex = player1Pieces.firstIndex(of: selectedPiece) {
+                player1Pieces.remove(at: selectedIndex)
+            }
+        } else {
+            if let selectedIndex = player2Pieces.firstIndex(of: selectedPiece) {
+                player2Pieces.remove(at: selectedIndex)
+            }
+        }
+        
+        // Reset selected piece
+        self.selectedPiece = nil
+
+        if checkGameOver() {
+            isGameOver = true
+            winner = calculateWinner()
+        } else {
+            currentPlayer = currentPlayer == 1 ? 2 : 1
+        }
+    }
+
     
     func placeStone(at index: Int) {
         guard board[index] == nil else { return }

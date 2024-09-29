@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Skystone {
+struct Skystone: Equatable {
     var top: Int
     var right: Int
     var bottom: Int
