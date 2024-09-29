@@ -23,13 +23,6 @@ class GameViewModel: ObservableObject {
         Skystone(top: 3, right: 1, bottom: 4, left: 2, owner: 2),
         Skystone(top: 1, right: 2, bottom: 4, left: 3, owner: 2)
     ]
-    @Published var computerPieces: [Skystone] = [
-        Skystone(top: 1, right: 3, bottom: 2, left: 4, owner: 2),
-        Skystone(top: 2, right: 4, bottom: 3, left: 1, owner: 2),
-        Skystone(top: 4, right: 2, bottom: 1, left: 3, owner: 2),
-        Skystone(top: 3, right: 1, bottom: 4, left: 2, owner: 2),
-        Skystone(top: 1, right: 2, bottom: 4, left: 3, owner: 2)
-    ]
     @Published var selectedPiece: Skystone?
     @Published var currentPlayer: Int = 1
     @Published var isGameOver: Bool = false
@@ -37,10 +30,17 @@ class GameViewModel: ObservableObject {
     
     func Lvl1ComputerMove() {
         let availableCells = board.indices.filter { board[$0] == nil }
-        if let randomCell = availableCells.randomElement() {
-            placeStone(at: randomCell)
+
+        // Ensure the computer has pieces left to place
+        guard !player2Pieces.isEmpty, let randomCell = availableCells.randomElement() else { return }
+
+        // Pick a random piece from player2's available pieces
+        if let randomPiece = player2Pieces.randomElement() {
+            selectedPiece = randomPiece
+            placeSelectedPiece(at: randomCell) // Use placeSelectedPiece to handle removing the piece
         }
     }
+
     
     func placeSelectedPiece(at index: Int) {
         guard board[index] == nil, let selectedPiece = selectedPiece else { return }
