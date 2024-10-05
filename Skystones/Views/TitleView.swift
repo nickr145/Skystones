@@ -12,41 +12,58 @@ struct TitleView: View {
     @State private var showPVCView = false
 
     var body: some View {
-        VStack(spacing: 20) {
+        ZStack {
+            Color.black
+            
+            GIFView(gifName: "portal")
+                .scaledToFit()
+                .ignoresSafeArea()
+            
             Text("Welcome to Skystones")
                 .font(.largeTitle)
                 .bold()
+                .foregroundStyle(.white)
+            
+            VStack(spacing: 20) {
+                Text("")
+                Text("")
+                Text("")
+                Text("")
+                Text("")
+                Text("")
 
-            Button(action: {
-                showPVPView = true
-            }) {
-                Text("PVP (Player vs Player)")
-                    .font(.title2)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
+                Button(action: {
+                    showPVPView = true
+                }) {
+                    Text("PVP (Player vs Player)")
+                        .font(.title2)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
 
-            Button(action: {
-                // Handle PVC logic here
-                showPVCView = true
-            }) {
-                Text("PVC (Player vs Computer)")
-                    .font(.title2)
-                    .padding()
-                    .background(Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                Button(action: {
+                    // Handle PVC logic here
+                    showPVCView = true
+                }) {
+                    Text("PVC (Player vs Computer)")
+                        .font(.title2)
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+            .padding()
+            .fullScreenCover(isPresented: $showPVPView) {
+                PVPView()
+            }
+            .fullScreenCover(isPresented: $showPVCView) {
+                PVCView() 
             }
         }
-        .padding()
-        .fullScreenCover(isPresented: $showPVPView) {
-            PVPView()
-        }
-        .fullScreenCover(isPresented: $showPVCView) {
-            PVCView() 
-        }
+        .ignoresSafeArea()
     }
 }
 
