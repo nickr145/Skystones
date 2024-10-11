@@ -11,7 +11,7 @@ struct PieceSelectionView: View {
     @ObservedObject var viewModel: GameViewModel
 
     var body: some View {
-        VStack {
+        VStack() {
             HStack {
                 // Player 1's pieces
                 ForEach(viewModel.player1Pieces.indices, id: \.self) { index in

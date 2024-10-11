@@ -17,6 +17,29 @@ struct GameBoardView: View {
 
     var body: some View {
         VStack {
+            HStack {
+                VStack {
+                    Text("Player 1")
+                        .font(.headline)
+                        .foregroundColor(.blue)
+                    Text("\(viewModel.player1Score)")
+                        .font(.largeTitle)
+                        .foregroundColor(.blue)
+                }
+                Spacer()
+                VStack {
+                    Text("Player 2")
+                        .font(.headline)
+                        .foregroundColor(.red)
+                    Text("\(viewModel.player2Score)")
+                        .font(.largeTitle)
+                        .foregroundColor(.red)
+                }
+            }
+            .padding()
+            .background(Color.gray.opacity(0.2))
+            .cornerRadius(10)
+            .padding()
             
             // Board Grid
             LazyVGrid(columns: columns, spacing: 10) {
