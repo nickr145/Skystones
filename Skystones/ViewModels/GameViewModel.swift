@@ -27,6 +27,15 @@ class GameViewModel: ObservableObject {
     @Published var currentPlayer: Int = 1
     @Published var isGameOver: Bool = false
     @Published var winner: Int?
+    @Published var player1Score: Int = 0
+    @Published var player2Score: Int = 0
+    
+    func updateScores() {
+        let player1Stones = board.filter { $0?.owner == 1 }.count
+        let player2Stones = board.filter { $0?.owner == 2 }.count
+        player1Score = player1Stones
+        player2Score = player2Stones
+    }
     
     func Lvl1ComputerMove() {
         let availableCells = board.indices.filter { board[$0] == nil }
@@ -68,6 +77,8 @@ class GameViewModel: ObservableObject {
         } else {
             currentPlayer = currentPlayer == 1 ? 2 : 1
         }
+        
+        updateScores()
     }
 
     
@@ -131,6 +142,8 @@ class GameViewModel: ObservableObject {
         currentPlayer = 1
         isGameOver = false
         winner = nil
+        player1Score = 0
+        player2Score = 0
     }
     
     func checkGameOver() -> Bool {
