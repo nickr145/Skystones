@@ -129,8 +129,3 @@ struct InstructionsView: View {
 #Preview {
     InstructionsView()
 }
-
-
-#Preview {
-    InstructionsView()
-}
