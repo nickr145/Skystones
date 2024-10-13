@@ -78,7 +78,7 @@ struct TitleView: View {
                 PVCView() 
             }
             .fullScreenCover(isPresented: $showInstructionsView) {
-                //InstructionsView()
+                InstructionsView()
             }
         }
         .ignoresSafeArea()
