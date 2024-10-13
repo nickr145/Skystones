@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct InstructionsView: View {
+    @Environment(\.dismiss) var dismiss  // For dismissing the view
+    
     var body: some View {
         ZStack {
             // Background gradient
@@ -114,15 +116,26 @@ struct InstructionsView: View {
                     .foregroundColor(.white)
                     .font(.body)
                     .multilineTextAlignment(.leading)
-
-                    // Spacing for scrolling
-                    Spacer()
                 }
                 .padding()
+                
+                Button(action: {
+                    dismiss()
+                }) {
+                    Text("Back")
+                        .font(.footnote)
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.black)
+                        .cornerRadius(100)
+                }
+                
+                
             }
+            
         }
         .navigationTitle("Instructions")
-        .navigationBarTitleDisplayMode(.inline)  // Optional to reduce title size
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
