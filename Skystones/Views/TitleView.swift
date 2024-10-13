@@ -10,6 +10,7 @@ import SwiftUI
 struct TitleView: View {
     @State private var showPVPView = false
     @State private var showPVCView = false
+    @State private var showInstructionsView = false
 
     var body: some View {
         ZStack {
@@ -24,13 +25,14 @@ struct TitleView: View {
                 .bold()
                 .foregroundStyle(.white)
             
-            VStack(spacing: 20) {
+            VStack(spacing: 50) {
                 Text("")
                 Text("")
                 Text("")
                 Text("")
                 Text("")
                 Text("")
+                //Text("")
 
                 Button(action: {
                     showPVPView = true
@@ -54,6 +56,19 @@ struct TitleView: View {
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
+                
+                // New Instructions Button
+                Button(action: {
+                    showInstructionsView = true
+                }) {
+                    Text("Instructions")
+                        .font(.title2)
+                        .padding()
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                
             }
             .padding()
             .fullScreenCover(isPresented: $showPVPView) {
@@ -61,6 +76,9 @@ struct TitleView: View {
             }
             .fullScreenCover(isPresented: $showPVCView) {
                 PVCView() 
+            }
+            .fullScreenCover(isPresented: $showInstructionsView) {
+                //InstructionsView()
             }
         }
         .ignoresSafeArea()

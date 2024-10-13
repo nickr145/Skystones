@@ -14,6 +14,7 @@ struct PVCView: View {
     var body: some View {
         ZStack {
             Color.black
+                .ignoresSafeArea()
             
             GIFView(gifName: "BoardBG")
                 .scaledToFit()
@@ -23,24 +24,26 @@ struct PVCView: View {
                 .navigationTitle("PVC (Player vs Computer)")
                 .padding()
                 .background(Color.clear)
+                .zIndex(0)
             
             VStack {
-                Spacer()
-                // Back button
-                Button(action: {
-                    dismiss()  // Dismiss the current view to return to TitleView
-                }) {
-                    Text("Back to Title Screen")
-                        .font(.footnote)
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.black)
-                        .cornerRadius(100)
-                        .padding(.bottom,10)
+                HStack {
+                    Button(action: {
+                        dismiss()  // Dismiss the current view to return to TitleView
+                    }) {
+                        Text("Back")
+                            .font(.footnote)
+                            .padding()
+                            .background(Color.green)
+                            .foregroundColor(.black)
+                            .cornerRadius(100)
+                    }
+                    .padding(.top, 70)
                 }
+                Spacer()
             }
         }
-        .ignoresSafeArea()
+        .ignoresSafeArea(.all)
         .onChange(of: viewModel.currentPlayer) { newPlayer in
             if newPlayer == 2 {
                 performLvl1ComputerMove()
