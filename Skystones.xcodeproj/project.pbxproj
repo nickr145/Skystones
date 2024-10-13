@@ -22,6 +22,7 @@
 		5B2089D52CA24AB20064028E /* PVCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089D42CA24AB20064028E /* PVCView.swift */; };
 		5B2089DF2CA8FA380064028E /* PieceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089DE2CA8FA380064028E /* PieceSelectionView.swift */; };
 		5B2089E12CAB3FC80064028E /* portal.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089E02CAB3FC70064028E /* portal.gif */; };
+		5B2089E32CBB770B0064028E /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089E22CBB770B0064028E /* InstructionsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		5B2089D42CA24AB20064028E /* PVCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PVCView.swift; sourceTree = "<group>"; };
 		5B2089DE2CA8FA380064028E /* PieceSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceSelectionView.swift; sourceTree = "<group>"; };
 		5B2089E02CAB3FC70064028E /* portal.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = portal.gif; sourceTree = "<group>"; };
+		5B2089E22CBB770B0064028E /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				5B2089D02CA0F4310064028E /* TitleView.swift */,
 				5B2089D42CA24AB20064028E /* PVCView.swift */,
 				5B2089DE2CA8FA380064028E /* PieceSelectionView.swift */,
+				5B2089E22CBB770B0064028E /* InstructionsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B2089BF2C9E71CA0064028E /* GameViewModel.swift in Sources */,
+				5B2089E32CBB770B0064028E /* InstructionsView.swift in Sources */,
 				5B2089CA2C9FDFCB0064028E /* GIFView.swift in Sources */,
 				5B2089D32CA11A3B0064028E /* PVPView.swift in Sources */,
 				5B2089C12C9E74E00064028E /* EmptyCellView.swift in Sources */,
