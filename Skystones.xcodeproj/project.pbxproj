@@ -23,6 +23,7 @@
 		5B2089DF2CA8FA380064028E /* PieceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089DE2CA8FA380064028E /* PieceSelectionView.swift */; };
 		5B2089E12CAB3FC80064028E /* portal.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089E02CAB3FC70064028E /* portal.gif */; };
 		5B2089E32CBB770B0064028E /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089E22CBB770B0064028E /* InstructionsView.swift */; };
+		5B2089E62CBCD92D0064028E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089E52CBCD92D0064028E /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,8 @@
 		5B2089DE2CA8FA380064028E /* PieceSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceSelectionView.swift; sourceTree = "<group>"; };
 		5B2089E02CAB3FC70064028E /* portal.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = portal.gif; sourceTree = "<group>"; };
 		5B2089E22CBB770B0064028E /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
+		5B2089E42CBCD8D90064028E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5B2089E52CBCD92D0064028E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +78,7 @@
 		5B2089AB2C9E69D80064028E /* Skystones */ = {
 			isa = PBXGroup;
 			children = (
+				5B2089E42CBCD8D90064028E /* Info.plist */,
 				5B2089AC2C9E69D80064028E /* SkystonesApp.swift */,
 				5B2089C82C9F7E4C0064028E /* ViewModels */,
 				5B2089C72C9F7E440064028E /* Models */,
@@ -83,6 +87,7 @@
 				5B2089E02CAB3FC70064028E /* portal.gif */,
 				5B2089CC2C9FE1040064028E /* BoardBG.gif */,
 				5B2089B22C9E69D90064028E /* Preview Content */,
+				5B2089E52CBCD92D0064028E /* LaunchScreen.storyboard */,
 			);
 			path = Skystones;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 				5B2089E12CAB3FC80064028E /* portal.gif in Resources */,
 				5B2089CD2C9FE1040064028E /* BoardBG.gif in Resources */,
 				5B2089CB2C9FE0930064028E /* Assets.xcassets in Resources */,
+				5B2089E62CBCD92D0064028E /* LaunchScreen.storyboard in Resources */,
 				5B2089B42C9E69D90064028E /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,11 +352,11 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Skystones/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Skystones/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -374,11 +380,11 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Skystones/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Skystones/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

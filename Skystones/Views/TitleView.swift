@@ -19,11 +19,23 @@ struct TitleView: View {
             GIFView(gifName: "portal")
                 .scaledToFit()
                 .ignoresSafeArea()
+                .frame(width: 500, height: 500)
             
-            Text("Welcome to Skystones")
-                .font(.largeTitle)
-                .bold()
-                .foregroundStyle(.white)
+            GeometryReader { geometry in
+                VStack {
+                    Spacer()  // Push the image to the center vertically
+
+                    Image("skystones-LC")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: min(geometry.size.width * 0.6, 300),  // Adjust based on screen width, with a max size of 300
+                               height: min(geometry.size.width * 0.6, 300))
+                        .ignoresSafeArea()
+
+                    Spacer()  // Push the image to the center vertically
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)  // Full screen frame
+            }
             
             VStack(spacing: 50) {
                 Text("")
