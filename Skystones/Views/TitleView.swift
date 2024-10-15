@@ -28,7 +28,7 @@ struct TitleView: View {
                     Image("skystones-LC")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: min(geometry.size.width * 0.6, 300),  // Adjust based on screen width, with a max size of 300
+                        .frame(width: min(geometry.size.width * 0.6, 300),
                                height: min(geometry.size.width * 0.6, 300))
                         .ignoresSafeArea()
 
@@ -58,7 +58,6 @@ struct TitleView: View {
                 }
 
                 Button(action: {
-                    // Handle PVC logic here
                     showPVCView = true
                 }) {
                     Text("PVC (Player vs Computer)")
@@ -69,7 +68,6 @@ struct TitleView: View {
                         .cornerRadius(10)
                 }
                 
-                // New Instructions Button
                 Button(action: {
                     showInstructionsView = true
                 }) {
