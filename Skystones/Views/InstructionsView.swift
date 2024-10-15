@@ -12,8 +12,7 @@ struct InstructionsView: View {
     
     var body: some View {
         ZStack {
-            // Background gradient
-            LinearGradient(gradient: Gradient(colors: [.blue, .purple, .black]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            Color.black
                 .ignoresSafeArea()
 
             ScrollView {
@@ -21,7 +20,6 @@ struct InstructionsView: View {
                     
                     // Title with shadow
                     HStack(spacing: 20) {
-                        // Title with shadow
                         Text("Skystones Instructions")
                             .font(.largeTitle)
                             .bold()
@@ -31,8 +29,9 @@ struct InstructionsView: View {
                             .padding(.bottom, 10)
                         
                         // Skystone view next to title
+                        
                         SkystoneView(skystone: Skystone(top: 2, right: 3, bottom: 1, left: 4, owner: 1))
-                            .frame(width: 100, height: 60)  // Adjust size if needed
+                            .frame(width: 100, height: 60)
                             .padding(.leading, 10)
                     }
                     .padding(.horizontal)
