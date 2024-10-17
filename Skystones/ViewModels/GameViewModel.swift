@@ -37,6 +37,24 @@ class GameViewModel: ObservableObject {
         player2Score = player2Stones
     }
     
+    // Method to perform moves based on difficulty level
+    func performComputerMove(for level: Int) {
+        switch level {
+        case 1:
+            Lvl1ComputerMove()  // Random moves
+        case 2:
+            Lvl2ComputerMove()  // Basic strategy: avoid bad spots
+        case 3:
+            Lvl3ComputerMove()  // More advanced strategy
+        case 4:
+            Lvl4ComputerMove()  // MiniMax algorithm, depth limited
+        case 5:
+            Lvl5ComputerMove()  // MiniMax with Alpha-Beta pruning
+        default:
+            Lvl1ComputerMove()  // Default to level 1 if not specified
+        }
+    }
+    
     func Lvl1ComputerMove() {
         let availableCells = board.indices.filter { board[$0] == nil }
 
@@ -48,6 +66,160 @@ class GameViewModel: ObservableObject {
             selectedPiece = randomPiece
             placeSelectedPiece(at: randomCell) // Use placeSelectedPiece to handle removing the piece
         }
+    }
+    
+    // Level 2 AI: Avoid bad spots, basic capture logic
+    func Lvl2ComputerMove() {
+        let availableCells = board.indices.filter { board[$0] == nil }
+
+        // Basic heuristic: avoid edges or spots where capture is easy
+        let prioritizedCells = availableCells.filter { $0 != 0 && $0 != 2 && $0 != 6 && $0 != 8 }
+
+        let cellToPlace = prioritizedCells.isEmpty ? availableCells.randomElement() : prioritizedCells.randomElement()
+
+        if let randomPiece = player2Pieces.randomElement(), let cell = cellToPlace {
+            selectedPiece = randomPiece
+            placeSelectedPiece(at: cell)
+        }
+    }
+    
+    // Level 3 AI: Aggressive capture strategy
+    func Lvl3ComputerMove() {
+        let availableCells = board.indices.filter { board[$0] == nil }
+        
+        // Prioritize capture moves
+        for cell in availableCells {
+            if let piece = player2Pieces.randomElement() {
+                if canCaptureAdjacent(at: cell, with: piece) {
+                    selectedPiece = piece
+                    placeSelectedPiece(at: cell)
+                    return
+                }
+            }
+        }
+        
+        // Fall back to random if no captures available
+        Lvl1ComputerMove()
+    }
+    
+    func Lvl4ComputerMove() {
+        let availableCells = board.indices.filter { board[$0] == nil }
+        guard !player2Pieces.isEmpty else { return }
+        
+        // Try to find a move that will capture stones
+        for cell in availableCells {
+            if let randomPiece = player2Pieces.randomElement() {
+                if canCaptureAt(cell: cell, with: randomPiece) {
+                    selectedPiece = randomPiece
+                    placeSelectedPiece(at: cell)
+                    return
+                }
+            }
+        }
+        
+        // Fallback to random move if no capture opportunities
+        if let randomCell = availableCells.randomElement(),
+           let randomPiece = player2Pieces.randomElement() {
+            selectedPiece = randomPiece
+            placeSelectedPiece(at: randomCell)
+        }
+    }
+    
+    func Lvl5ComputerMove() {
+        let availableCells = board.indices.filter { board[$0] == nil }
+        guard !player2Pieces.isEmpty else { return }
+        
+        var bestScore = Int.min
+        var bestMove: (cell: Int, piece: Skystone)?
+
+        for cell in availableCells {
+            if let randomPiece = player2Pieces.randomElement() {
+                // Simulate placing the piece and calculate the score
+                let simulatedScore = simulateMove(for: randomPiece, at: cell)
+                if simulatedScore > bestScore {
+                    bestScore = simulatedScore
+                    bestMove = (cell, randomPiece)
+                }
+            }
+        }
+        
+        // Perform the best move
+        if let bestMove = bestMove {
+            selectedPiece = bestMove.piece
+            placeSelectedPiece(at: bestMove.cell)
+        }
+    }
+    
+    // Logic for being able to capture adjacent cells with a given piece for level 3 AI
+    func canCaptureAdjacent(at index: Int, with piece: Skystone) -> Bool {
+        // Simplified logic to check if placing the piece will capture anything
+        // Check top, bottom, left, right neighbors
+        if index >= 3, let topStone = board[index - 3], piece.canCapture(topStone, direction: .top) {
+            return true
+        }
+        if index <= 5, let bottomStone = board[index + 3], piece.canCapture(bottomStone, direction: .bottom) {
+            return true
+        }
+        if index % 3 != 0, let leftStone = board[index - 1], piece.canCapture(leftStone, direction: .left) {
+            return true
+        }
+        if index % 3 != 2, let rightStone = board[index + 1], piece.canCapture(rightStone, direction: .right) {
+            return true
+        }
+        return false
+    }
+    
+    // Logic to capture a certain cell for a given piece for level 4 AI
+    func canCaptureAt(cell: Int, with piece: Skystone) -> Bool {
+        let topIndex = cell - 3
+        let bottomIndex = cell + 3
+        let leftIndex = cell - 1
+        let rightIndex = cell + 1
+        
+        let topCapture = topIndex >= 0 && board[topIndex]?.owner == 1 && piece.canCapture(board[topIndex]!, direction: .top)
+        let bottomCapture = bottomIndex < board.count && board[bottomIndex]?.owner == 1 && piece.canCapture(board[bottomIndex]!, direction: .bottom)
+        let leftCapture = cell % 3 != 0 && board[leftIndex]?.owner == 1 && piece.canCapture(board[leftIndex]!, direction: .left)
+        let rightCapture = cell % 3 != 2 && board[rightIndex]?.owner == 1 && piece.canCapture(board[rightIndex]!, direction: .right)
+
+        return topCapture || bottomCapture || leftCapture || rightCapture
+    }
+    
+    // Logic to simulate a certain move on a copy of the board and return how many stones can be potentially captured, used in order to determine the best possible move for level 5 AI
+    func simulateMove(for piece: Skystone, at cell: Int) -> Int {
+        var simulatedBoard = board
+        simulatedBoard[cell] = piece
+        let capturedStones = captureSimulatedStones(at: cell, board: simulatedBoard)
+        
+        // Calculate the score based on captured stones
+        return capturedStones
+    }
+
+    // Logic to identify all capturable stones at a place in the board for level 5 AI
+    func captureSimulatedStones(at index: Int, board: [Skystone?]) -> Int {
+        let stone = board[index]!
+        var capturedCount = 0
+
+        // Capture top stone
+        if index >= 3, let topStone = board[index - 3], stone.canCapture(topStone, direction: .top) {
+            capturedCount += 1
+        }
+
+        // Capture bottom stone
+        if index <= 5, let bottomStone = board[index + 3], stone.canCapture(bottomStone, direction: .bottom) {
+            capturedCount += 1
+        }
+
+        // Capture left stone
+        if index % 3 != 0, let leftStone = board[index - 1], stone.canCapture(leftStone, direction: .left) {
+            capturedCount += 1
+        }
+
+        // Capture right stone
+        if index % 3 != 2, let rightStone = board[index + 1], stone.canCapture(rightStone, direction: .right) {
+            capturedCount += 1
+        }
+
+        return capturedCount
     }
 
     
