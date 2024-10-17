@@ -24,6 +24,7 @@
 		5B2089E12CAB3FC80064028E /* portal.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089E02CAB3FC70064028E /* portal.gif */; };
 		5B2089E32CBB770B0064028E /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089E22CBB770B0064028E /* InstructionsView.swift */; };
 		5B2089E62CBCD92D0064028E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089E52CBCD92D0064028E /* LaunchScreen.storyboard */; };
+		5B2089E82CC0BBDB0064028E /* DifficultySelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2089E72CC0BBDB0064028E /* DifficultySelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		5B2089E22CBB770B0064028E /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
 		5B2089E42CBCD8D90064028E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5B2089E52CBCD92D0064028E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5B2089E72CC0BBDB0064028E /* DifficultySelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultySelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				5B2089D42CA24AB20064028E /* PVCView.swift */,
 				5B2089DE2CA8FA380064028E /* PieceSelectionView.swift */,
 				5B2089E22CBB770B0064028E /* InstructionsView.swift */,
+				5B2089E72CC0BBDB0064028E /* DifficultySelectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B2089BF2C9E71CA0064028E /* GameViewModel.swift in Sources */,
+				5B2089E82CC0BBDB0064028E /* DifficultySelectionView.swift in Sources */,
 				5B2089E32CBB770B0064028E /* InstructionsView.swift in Sources */,
 				5B2089CA2C9FDFCB0064028E /* GIFView.swift in Sources */,
 				5B2089D32CA11A3B0064028E /* PVPView.swift in Sources */,

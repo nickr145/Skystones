@@ -30,6 +30,8 @@ class GameViewModel: ObservableObject {
     @Published var player1Score: Int = 0
     @Published var player2Score: Int = 0
     
+    var selectedDifficulty: Int = 1
+    
     func updateScores() {
         let player1Stones = board.filter { $0?.owner == 1 }.count
         let player2Stones = board.filter { $0?.owner == 2 }.count
@@ -37,9 +39,13 @@ class GameViewModel: ObservableObject {
         player2Score = player2Stones
     }
     
+    func setupComputerDifficulty(_ level: Int) {
+        selectedDifficulty = level
+    }
+    
     // Method to perform moves based on difficulty level
-    func performComputerMove(for level: Int) {
-        switch level {
+    func performComputerMove() {
+        switch selectedDifficulty {
         case 1:
             Lvl1ComputerMove()  // Random moves
         case 2:
