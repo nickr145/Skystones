@@ -11,30 +11,44 @@ struct DifficultySelectionView: View {
     @Binding var showPVCView: Bool
     @State private var showGameView = false // To navigate to PVCView
     @State private var selectedDifficulty: Int = 1
+    @State private var difficultyImageStrings = ["skystones-level1", "skystones-level2", "skystones-level3", "skystones-level4", "skystones-level5"]
 
     var body: some View {
-        VStack {
-            Text("Select Difficulty")
-                .font(.title)
+        ZStack {
+            Color.black
+                .ignoresSafeArea()
+            VStack {
+                Text("Select Difficulty")
+                    .font(.title)
+                    .foregroundColor(.red)
 
-            Picker("Difficulty", selection: $selectedDifficulty) {
-                ForEach(1..<6) { level in
-                    Text("Level \(level)")
+                Picker("Difficulty", selection: $selectedDifficulty) {
+                    ForEach(1..<6) { level in
+                        Text("Level \(level)")
+                            .foregroundColor(.white)
+                    }
+                    
+                }
+                .pickerStyle(WheelPickerStyle())
+                .padding()
+                
+                Image(difficultyImageStrings[selectedDifficulty])
+                    .padding(60)
+
+                Spacer()
+                 
+                
+                Button(action: {
+                    showGameView = true
+                }) {
+                    Text("Start Game")
+                        .font(.title)
+                        .padding()
                 }
             }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding()
-
-            Button(action: {
-                showGameView = true
-            }) {
-                Text("Start Game")
-                    .font(.title)
-                    .padding()
-            }
+            .fullScreenCover(isPresented: $showGameView) {
+                PVCView(difficulty: selectedDifficulty, showPVCView: $showPVCView)
         }
-        .fullScreenCover(isPresented: $showGameView) {
-            PVCView(difficulty: selectedDifficulty, showPVCView: $showPVCView)
         }
     }
 }
