@@ -9,7 +9,8 @@ import SwiftUI
 
 struct TitleView: View {
     @State private var showPVPView = false
-    @State private var showPVCView = false
+    //@State private var showPVCView = false
+    @State private var showDifficultySelection = false
     @State private var showInstructionsView = false
 
     var body: some View {
@@ -58,7 +59,7 @@ struct TitleView: View {
                 }
 
                 Button(action: {
-                    showPVCView = true
+                    showDifficultySelection = true
                 }) {
                     Text("PVC (Player vs Computer)")
                         .font(.title2)
@@ -84,8 +85,8 @@ struct TitleView: View {
             .fullScreenCover(isPresented: $showPVPView) {
                 PVPView()
             }
-            .fullScreenCover(isPresented: $showPVCView) {
-                PVCView() 
+            .fullScreenCover(isPresented: $showDifficultySelection) {
+                DifficultySelectionView(showPVCView: $showDifficultySelection)
             }
             .fullScreenCover(isPresented: $showInstructionsView) {
                 InstructionsView()

@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct PVCView: View {
+    var difficulty: Int
     @StateObject var viewModel = GameViewModel()
-    @Environment(\.dismiss) var dismiss  // For dismissing the view
+    //@Environment(\.dismiss) var dismiss  // For dismissing the view
+    @Binding var showPVCView: Bool
 
     var body: some View {
         ZStack {
@@ -29,7 +31,7 @@ struct PVCView: View {
             VStack {
                 HStack {
                     Button(action: {
-                        dismiss()  // Dismiss the current view to return to TitleView
+                        showPVCView = false // Dismiss the current view to return to TitleView
                     }) {
                         Text("Back")
                             .font(.footnote)
@@ -43,22 +45,31 @@ struct PVCView: View {
                 Spacer()
             }
         }
+        .onAppear {
+            viewModel.setupComputerDifficulty(difficulty)
+        }
         .ignoresSafeArea(.all)
         .onChange(of: viewModel.currentPlayer) { newPlayer in
             if newPlayer == 2 {
-                performLvl1ComputerMove()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    viewModel.performComputerMove()
+                }
             }
         }
     }
 
-    private func performLvl1ComputerMove() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            viewModel.Lvl1ComputerMove()
-        }
-    }
+//    private func performComputerMove() {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//            viewModel.performComputerMove()
+//        }
+//    }
 }
 
 
-#Preview {
-    PVCView()
+struct PVCView_Previews: PreviewProvider {
+    @State static var showPVCView = false
+
+    static var previews: some View {
+        PVCView(difficulty: 3, showPVCView: $showPVCView)
+    }
 }
