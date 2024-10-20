@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct InstructionsView: View {
+    @StateObject var audioManager = AudioPlayerManager()
     @Environment(\.dismiss) var dismiss  // For dismissing the view
     
     var body: some View {
@@ -132,6 +133,12 @@ struct InstructionsView: View {
                 
             }
             
+        }
+        .onAppear {
+            audioManager.playAudio(named: "InstructionsMusic")
+        }
+        .onDisappear {
+            audioManager.stopAudio()
         }
         .navigationTitle("Instructions")
         .navigationBarTitleDisplayMode(.inline)

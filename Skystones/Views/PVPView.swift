@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PVPView: View {
     @StateObject var viewModel = GameViewModel()
+    @StateObject var audioManager = AudioPlayerManager()
     @Environment(\.dismiss) var dismiss  // For dismissing the view
     
     var body: some View {
@@ -43,6 +44,12 @@ struct PVPView: View {
                 }
                 Spacer()
             }
+        }
+        .onAppear {
+            audioManager.playAudio(named: "GameBGMusic")
+        }
+        .onDisappear {
+            audioManager.stopAudio()
         }
         .ignoresSafeArea(.all)
     }
