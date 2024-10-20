@@ -34,7 +34,7 @@
     <resources>
         <image name="skystones-LC" width="1608" height="540"/>
         <namedColor name="background-LC">
-            <color red="0.12463851497767095" green="0.12661949112152368" blue="0.228515625" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.125" green="0.12700000405311584" blue="0.22900000214576721" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

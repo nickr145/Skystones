@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PVCView: View {
+    @StateObject var audioManager = AudioPlayerManager()
     var difficulty: Int
     @StateObject var viewModel = GameViewModel()
     //@Environment(\.dismiss) var dismiss  // For dismissing the view
@@ -47,6 +48,10 @@ struct PVCView: View {
         }
         .onAppear {
             viewModel.setupComputerDifficulty(difficulty)
+            audioManager.playAudio(named: "GameBGMusic")
+        }
+        .onDisappear {
+            audioManager.stopAudio()
         }
         .ignoresSafeArea(.all)
         .onChange(of: viewModel.currentPlayer) { newPlayer in
@@ -56,13 +61,8 @@ struct PVCView: View {
                 }
             }
         }
+        
     }
-
-//    private func performComputerMove() {
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//            viewModel.performComputerMove()
-//        }
-//    }
 }
 
 

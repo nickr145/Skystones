@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TitleView: View {
+    @StateObject var audioManager = AudioPlayerManager()
     @State private var showPVPView = false
     //@State private var showPVCView = false
     @State private var showDifficultySelection = false
@@ -48,6 +49,7 @@ struct TitleView: View {
                 //Text("")
 
                 Button(action: {
+                    audioManager.stopAudio()
                     showPVPView = true
                 }) {
                     Text("PVP (Player vs Player)")
@@ -59,6 +61,7 @@ struct TitleView: View {
                 }
 
                 Button(action: {
+                    audioManager.stopAudio()
                     showDifficultySelection = true
                 }) {
                     Text("PVC (Player vs Computer)")
@@ -70,6 +73,7 @@ struct TitleView: View {
                 }
                 
                 Button(action: {
+                    audioManager.stopAudio()
                     showInstructionsView = true
                 }) {
                     Text("Instructions")
@@ -82,15 +86,24 @@ struct TitleView: View {
                 
             }
             .padding()
-            .fullScreenCover(isPresented: $showPVPView) {
+            .fullScreenCover(isPresented: $showPVPView, onDismiss: {
+                audioManager.playAudio(named: "TitleMusic") // Restart music when returning to TitleView
+            }) {
                 PVPView()
             }
-            .fullScreenCover(isPresented: $showDifficultySelection) {
+            .fullScreenCover(isPresented: $showDifficultySelection, onDismiss: {
+                audioManager.playAudio(named: "TitleMusic") // Restart music when returning to TitleView
+            }) {
                 DifficultySelectionView(showPVCView: $showDifficultySelection)
             }
-            .fullScreenCover(isPresented: $showInstructionsView) {
+            .fullScreenCover(isPresented: $showInstructionsView, onDismiss: {
+                audioManager.playAudio(named: "TitleMusic") // Restart music when returning to TitleView
+            }) {
                 InstructionsView()
             }
+        }
+        .onAppear {
+            audioManager.playAudio(named: "TitleMusic")
         }
         .ignoresSafeArea()
     }
