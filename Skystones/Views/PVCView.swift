@@ -23,7 +23,7 @@ struct PVCView: View {
                 .scaledToFit()
                 .ignoresSafeArea()
 
-            GameBoardView(viewModel: viewModel)
+            GameBoardView(viewModel: viewModel, showComputerPieces: false)
                 .navigationTitle("PVC (Player vs Computer)")
                 .padding()
                 .background(Color.clear)

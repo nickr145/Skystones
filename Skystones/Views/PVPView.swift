@@ -22,7 +22,7 @@ struct PVPView: View {
                 .scaledToFit()
                 .ignoresSafeArea(.all)
                 
-            GameBoardView(viewModel: viewModel)
+            GameBoardView(viewModel: viewModel, showComputerPieces: true)
                 .navigationTitle("Skystones")
                 .padding()
                 .background(Color.clear)

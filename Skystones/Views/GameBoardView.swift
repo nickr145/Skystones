@@ -14,6 +14,7 @@ struct GameBoardView: View {
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
+    var showComputerPieces: Bool
 
     var body: some View {
         VStack {
@@ -40,7 +41,6 @@ struct GameBoardView: View {
             .background(Color.gray.opacity(0.2))
             .cornerRadius(10)
             .padding()
-            
             // Board Grid
             LazyVGrid(columns: columns, spacing: 10) {
                 ForEach(viewModel.board.indices, id: \.self) { index in
@@ -68,7 +68,7 @@ struct GameBoardView: View {
                 )
             }
             // Piece Selection
-            PieceSelectionView(viewModel: viewModel)
+            PieceSelectionView(viewModel: viewModel, showComputerPieces: showComputerPieces)
         }
     }
 }
@@ -85,6 +85,6 @@ struct GameBoardView: View {
     let viewModel = GameViewModel()
     viewModel.board = sampleStones
     
-    return GameBoardView(viewModel: viewModel)
+    return GameBoardView(viewModel: viewModel, showComputerPieces: false)
 }
 
