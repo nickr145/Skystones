@@ -30,6 +30,42 @@ class GameViewModel: ObservableObject {
     @Published var player1Score: Int = 0
     @Published var player2Score: Int = 0
     
+    private var level1Pieces: [Skystone] = [
+        Skystone(top: 1, right: 0, bottom: 1, left: 2, owner: 2),
+        Skystone(top: 1, right: 1, bottom: 0, left: 2, owner: 2),
+        Skystone(top: 0, right: 2, bottom: 1, left: 1, owner: 2),
+        Skystone(top: 1, right: 1, bottom: 2, left: 0, owner: 2),
+        Skystone(top: 2, right: 0, bottom: 1, left: 1, owner: 2)
+    ]
+    private var level2Pieces: [Skystone] = [
+        Skystone(top: 2, right: 1, bottom: 2, left: 2, owner: 2),
+        Skystone(top: 2, right: 2, bottom: 1, left: 2, owner: 2),
+        Skystone(top: 1, right: 3, bottom: 2, left: 1, owner: 2),
+        Skystone(top: 2, right: 2, bottom: 2, left: 1, owner: 2),
+        Skystone(top: 3, right: 1, bottom: 2, left: 2, owner: 2)
+    ]
+    private var level3Pieces: [Skystone] = [
+        Skystone(top: 3, right: 2, bottom: 3, left: 1, owner: 2),
+        Skystone(top: 2, right: 3, bottom: 1, left: 3, owner: 2),
+        Skystone(top: 3, right: 3, bottom: 2, left: 1, owner: 2),
+        Skystone(top: 1, right: 3, bottom: 3, left: 2, owner: 2),
+        Skystone(top: 3, right: 1, bottom: 3, left: 2, owner: 2)
+    ]
+    private var level4Pieces: [Skystone] = [
+        Skystone(top: 3, right: 4, bottom: 2, left: 3, owner: 2),
+        Skystone(top: 4, right: 3, bottom: 4, left: 1, owner: 2),
+        Skystone(top: 3, right: 4, bottom: 3, left: 2, owner: 2),
+        Skystone(top: 4, right: 2, bottom: 3, left: 4, owner: 2),
+        Skystone(top: 3, right: 3, bottom: 4, left: 3, owner: 2)
+    ]
+    private var level5Pieces: [Skystone] = [
+        Skystone(top: 4, right: 4, bottom: 3, left: 4, owner: 2),
+        Skystone(top: 4, right: 4, bottom: 4, left: 3, owner: 2),
+        Skystone(top: 3, right: 4, bottom: 4, left: 4, owner: 2),
+        Skystone(top: 4, right: 3, bottom: 4, left: 4, owner: 2),
+        Skystone(top: 4, right: 4, bottom: 4, left: 4, owner: 2)
+    ]
+    
     var selectedDifficulty: Int = 1
     
     func updateScores() {
@@ -41,6 +77,21 @@ class GameViewModel: ObservableObject {
     
     func setupComputerDifficulty(_ level: Int) {
         selectedDifficulty = level
+        // Set Player 2's pieces based on difficulty
+        switch selectedDifficulty {
+        case 1:
+            player2Pieces = level1Pieces
+        case 2:
+            player2Pieces = level2Pieces
+        case 3:
+            player2Pieces = level3Pieces
+        case 4:
+            player2Pieces = level4Pieces
+        case 5:
+            player2Pieces = level5Pieces
+        default:
+            player2Pieces = level1Pieces
+        }
     }
     
     // Method to perform moves based on difficulty level
