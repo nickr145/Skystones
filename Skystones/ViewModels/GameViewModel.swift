@@ -10,18 +10,18 @@ import Foundation
 class GameViewModel: ObservableObject {
     @Published var board: [Skystone?] = Array(repeating: nil, count: 9)
     @Published var player1Pieces: [Skystone] = [
-        Skystone(top: 2, right: 3, bottom: 1, left: 4, owner: 1),
-        Skystone(top: 3, right: 4, bottom: 2, left: 1, owner: 1),
-        Skystone(top: 1, right: 2, bottom: 3, left: 4, owner: 1),
-        Skystone(top: 4, right: 1, bottom: 2, left: 3, owner: 1),
-        Skystone(top: 2, right: 1, bottom: 4, left: 3, owner: 1)
+        Skystone(top: 3, right: 2, bottom: 3, left: 2, owner: 1),
+        Skystone(top: 2, right: 3, bottom: 2, left: 3, owner: 1),
+        Skystone(top: 4, right: 1, bottom: 3, left: 2, owner: 1),
+        Skystone(top: 2, right: 4, bottom: 2, left: 3, owner: 1),
+        Skystone(top: 3, right: 3, bottom: 2, left: 3, owner: 1)
     ]
     @Published var player2Pieces: [Skystone] = [
-        Skystone(top: 1, right: 3, bottom: 2, left: 4, owner: 2),
-        Skystone(top: 2, right: 4, bottom: 3, left: 1, owner: 2),
-        Skystone(top: 4, right: 2, bottom: 1, left: 3, owner: 2),
-        Skystone(top: 3, right: 1, bottom: 4, left: 2, owner: 2),
-        Skystone(top: 1, right: 2, bottom: 4, left: 3, owner: 2)
+        Skystone(top: 3, right: 2, bottom: 3, left: 2, owner: 2),
+        Skystone(top: 2, right: 3, bottom: 2, left: 3, owner: 2),
+        Skystone(top: 4, right: 1, bottom: 3, left: 2, owner: 2),
+        Skystone(top: 2, right: 4, bottom: 2, left: 3, owner: 2),
+        Skystone(top: 3, right: 3, bottom: 2, left: 3, owner: 2)
     ]
     @Published var selectedPiece: Skystone?
     @Published var currentPlayer: Int = 1
@@ -77,20 +77,61 @@ class GameViewModel: ObservableObject {
     
     func setupComputerDifficulty(_ level: Int) {
         selectedDifficulty = level
-        // Set Player 2's pieces based on difficulty
         switch selectedDifficulty {
         case 1:
             player2Pieces = level1Pieces
+            player1Pieces = [
+                Skystone(top: 1, right: 2, bottom: 1, left: 0, owner: 1),
+                Skystone(top: 2, right: 1, bottom: 2, left: 0, owner: 1),
+                Skystone(top: 1, right: 3, bottom: 0, left: 1, owner: 1),
+                Skystone(top: 2, right: 2, bottom: 1, left: 1, owner: 1),
+                Skystone(top: 1, right: 2, bottom: 1, left: 2, owner: 1)
+            ]
         case 2:
             player2Pieces = level2Pieces
+            player1Pieces = [
+                Skystone(top: 2, right: 3, bottom: 1, left: 2, owner: 1),
+                Skystone(top: 3, right: 2, bottom: 1, left: 1, owner: 1),
+                Skystone(top: 2, right: 2, bottom: 2, left: 0, owner: 1),
+                Skystone(top: 1, right: 3, bottom: 3, left: 1, owner: 1),
+                Skystone(top: 2, right: 2, bottom: 3, left: 1, owner: 1)
+            ]
         case 3:
             player2Pieces = level3Pieces
+            player1Pieces = [
+                Skystone(top: 2, right: 3, bottom: 2, left: 2, owner: 1),
+                Skystone(top: 3, right: 3, bottom: 1, left: 2, owner: 1),
+                Skystone(top: 3, right: 1, bottom: 3, left: 2, owner: 1),
+                Skystone(top: 2, right: 3, bottom: 2, left: 2, owner: 1),
+                Skystone(top: 1, right: 4, bottom: 3, left: 1, owner: 1)
+            ]
         case 4:
             player2Pieces = level4Pieces
+            player1Pieces = [
+                Skystone(top: 3, right: 2, bottom: 4, left: 1, owner: 1),
+                Skystone(top: 2, right: 4, bottom: 3, left: 2, owner: 1),
+                Skystone(top: 3, right: 3, bottom: 2, left: 2, owner: 1),
+                Skystone(top: 4, right: 3, bottom: 2, left: 2, owner: 1),
+                Skystone(top: 2, right: 4, bottom: 3, left: 2, owner: 1)
+            ]
         case 5:
             player2Pieces = level5Pieces
+            player1Pieces = [
+                Skystone(top: 3, right: 4, bottom: 3, left: 2, owner: 1),
+                Skystone(top: 4, right: 3, bottom: 4, left: 1, owner: 1),
+                Skystone(top: 4, right: 2, bottom: 3, left: 3, owner: 1),
+                Skystone(top: 3, right: 4, bottom: 4, left: 2, owner: 1),
+                Skystone(top: 2, right: 4, bottom: 4, left: 3, owner: 1)
+            ]
         default:
             player2Pieces = level1Pieces
+            player1Pieces = [
+                Skystone(top: 1, right: 2, bottom: 1, left: 0, owner: 1),
+                Skystone(top: 2, right: 1, bottom: 2, left: 0, owner: 1),
+                Skystone(top: 1, right: 3, bottom: 0, left: 1, owner: 1),
+                Skystone(top: 2, right: 2, bottom: 1, left: 1, owner: 1),
+                Skystone(top: 1, right: 2, bottom: 1, left: 2, owner: 1)
+            ]
         }
     }
     

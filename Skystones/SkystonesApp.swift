@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct SkystonesApp: App {
+    @Environment(\.scenePhase) var scenePhase
+    @StateObject private var audioManager = AudioPlayerManager()
+    
     var body: some Scene {
         WindowGroup {
             TitleView()
+                .environmentObject(audioManager)
+                .onChange(of: scenePhase) {
+                    if scenePhase != .active {
+                        audioManager.stopAudio()
+                    }
+                }
         }
     }
 }
