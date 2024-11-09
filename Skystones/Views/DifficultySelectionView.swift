@@ -9,12 +9,12 @@ import SwiftUI
 
 struct DifficultySelectionView: View {
     @StateObject var audioManager = AudioPlayerManager()
+    @StateObject var viewModel = GameViewModel()
+    
     @Environment(\.dismiss) var dismiss
     @Binding var showPVCView: Bool
     @State private var showGameView = false
     @State private var selectedDifficulty: Int = 1
-    @State private var difficultyImageStrings = ["skystones-level1", "skystones-level2", "skystones-level3", "skystones-level4", "skystones-level5"]
-    @State private var musicDifficultyStrings = ["Level1Music", "Level2Music", "Level3Music", "Level4Music", "Level5Music"]
     
     var body: some View {
         ZStack {
@@ -47,11 +47,8 @@ struct DifficultySelectionView: View {
                 }
                 .pickerStyle(WheelPickerStyle())
                 .padding()
-                .onChange(of: selectedDifficulty) { newLevel in
-                    playAudioForDifficulty(level: newLevel)
-                }
                 
-                Image(difficultyImageStrings[selectedDifficulty])
+                Image(viewModel.difficultyImageStrings[selectedDifficulty])
                     .padding(60)
                 
                 Spacer()
@@ -73,16 +70,8 @@ struct DifficultySelectionView: View {
             }
         }
         .onAppear {
-            playAudioForDifficulty(level: selectedDifficulty)
+            audioManager.playAudio(named: "DifficultySelectionMusic")
         }
-        .onDisappear {
-            audioManager.stopAudio()
-        }
-    }
-    
-    private func playAudioForDifficulty(level: Int) {
-        let musicTrack = musicDifficultyStrings[level]
-        audioManager.playAudio(named: musicTrack)
     }
 }
 
