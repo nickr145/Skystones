@@ -34,6 +34,7 @@
 		5B2089F82CC4B9300064028E /* Level5Music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089F72CC4B9300064028E /* Level5Music.mp3 */; };
 		5B2089FA2CC4BF370064028E /* TitleMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089F92CC4BF370064028E /* TitleMusic.mp3 */; };
 		5B2089FD2CC4C8C40064028E /* InstructionsMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089FC2CC4C8C40064028E /* InstructionsMusic.mp3 */; };
+		5B208A1D2CDF2F0C0064028E /* DifficultySelectionMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5B208A1C2CDF2F0C0064028E /* DifficultySelectionMusic.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		5B2089F72CC4B9300064028E /* Level5Music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Level5Music.mp3; sourceTree = "<group>"; };
 		5B2089F92CC4BF370064028E /* TitleMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TitleMusic.mp3; sourceTree = "<group>"; };
 		5B2089FC2CC4C8C40064028E /* InstructionsMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = InstructionsMusic.mp3; sourceTree = "<group>"; };
+		5B208A1C2CDF2F0C0064028E /* DifficultySelectionMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DifficultySelectionMusic.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 				5B2089F72CC4B9300064028E /* Level5Music.mp3 */,
 				5B2089F92CC4BF370064028E /* TitleMusic.mp3 */,
 				5B2089FC2CC4C8C40064028E /* InstructionsMusic.mp3 */,
+				5B208A1C2CDF2F0C0064028E /* DifficultySelectionMusic.mp3 */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				5B2089B42C9E69D90064028E /* Preview Assets.xcassets in Resources */,
 				5B2089F62CC4B92A0064028E /* Level4Music.mp3 in Resources */,
 				5B2089EC2CC4767A0064028E /* GameBGMusic.mp3 in Resources */,
+				5B208A1D2CDF2F0C0064028E /* DifficultySelectionMusic.mp3 in Resources */,
 				5B2089F02CC4B7CF0064028E /* Level1Music.mp3 in Resources */,
 				5B2089F82CC4B9300064028E /* Level5Music.mp3 in Resources */,
 			);

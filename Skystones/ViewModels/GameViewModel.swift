@@ -8,6 +8,9 @@
 import Foundation
 
 class GameViewModel: ObservableObject {
+    @Published var difficultyImageStrings = ["skystones-level1", "skystones-level2", "skystones-level3", "skystones-level4", "skystones-level5"]
+    @Published var musicDifficultyStrings = ["Level1Music", "Level2Music", "Level3Music", "Level4Music", "Level5Music"]
+    
     @Published var board: [Skystone?] = Array(repeating: nil, count: 9)
     @Published var player1Pieces: [Skystone] = [
         Skystone(top: 3, right: 2, bottom: 3, left: 2, owner: 1),
@@ -111,15 +114,15 @@ class GameViewModel: ObservableObject {
                 Skystone(top: 3, right: 2, bottom: 3, left: 1, owner: 1),
                 Skystone(top: 2, right: 3, bottom: 3, left: 2, owner: 1),
                 Skystone(top: 3, right: 3, bottom: 2, left: 2, owner: 1),
-                Skystone(top: 4, right: 2, bottom: 2, left: 2, owner: 1),
+                Skystone(top: 1, right: 2, bottom: 4, left: 2, owner: 1),
                 Skystone(top: 2, right: 1, bottom: 3, left: 2, owner: 1)
             ]
         case 5:
             player2Pieces = level5Pieces
             player1Pieces = [
                 Skystone(top: 3, right: 4, bottom: 3, left: 2, owner: 1),
-                Skystone(top: 4, right: 3, bottom: 4, left: 1, owner: 1),
-                Skystone(top: 4, right: 2, bottom: 3, left: 3, owner: 1),
+                Skystone(top: 1, right: 3, bottom: 4, left: 1, owner: 1),
+                Skystone(top: 2, right: 2, bottom: 3, left: 3, owner: 1),
                 Skystone(top: 3, right: 4, bottom: 4, left: 2, owner: 1),
                 Skystone(top: 2, right: 4, bottom: 4, left: 3, owner: 1)
             ]
@@ -424,5 +427,10 @@ class GameViewModel: ObservableObject {
         let player1Stones = board.filter { $0?.owner == 1 }.count
         let player2Stones = board.filter { $0?.owner == 2 }.count
         return player1Stones > player2Stones ? 1 : 2
+    }
+    
+    func playAudioForDifficulty(audioManager: AudioPlayerManager, level: Int) {
+        let musicTrack = musicDifficultyStrings[level]
+        audioManager.playAudio(named: musicTrack)
     }
 }

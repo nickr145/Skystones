@@ -11,7 +11,6 @@ struct PVCView: View {
     @StateObject var audioManager = AudioPlayerManager()
     var difficulty: Int
     @StateObject var viewModel = GameViewModel()
-    //@Environment(\.dismiss) var dismiss  // For dismissing the view
     @Binding var showPVCView: Bool
 
     var body: some View {
@@ -48,7 +47,7 @@ struct PVCView: View {
         }
         .onAppear {
             viewModel.setupComputerDifficulty(difficulty)
-            audioManager.playAudio(named: "GameBGMusic")
+            audioManager.playAudio(named: viewModel.musicDifficultyStrings[difficulty])
         }
         .onDisappear {
             audioManager.stopAudio()
