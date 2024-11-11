@@ -114,16 +114,16 @@ class GameViewModel: ObservableObject {
                 Skystone(top: 3, right: 2, bottom: 3, left: 1, owner: 1),
                 Skystone(top: 2, right: 3, bottom: 3, left: 2, owner: 1),
                 Skystone(top: 3, right: 3, bottom: 2, left: 2, owner: 1),
-                Skystone(top: 1, right: 2, bottom: 4, left: 2, owner: 1),
+                Skystone(top: 1, right: 2, bottom: 3, left: 2, owner: 1),
                 Skystone(top: 2, right: 1, bottom: 3, left: 2, owner: 1)
             ]
         case 5:
             player2Pieces = level5Pieces
             player1Pieces = [
-                Skystone(top: 3, right: 4, bottom: 3, left: 2, owner: 1),
+                Skystone(top: 3, right: 3, bottom: 3, left: 2, owner: 1),
                 Skystone(top: 1, right: 3, bottom: 4, left: 1, owner: 1),
                 Skystone(top: 2, right: 2, bottom: 3, left: 3, owner: 1),
-                Skystone(top: 3, right: 4, bottom: 4, left: 2, owner: 1),
+                Skystone(top: 3, right: 3, bottom: 3, left: 3, owner: 1),
                 Skystone(top: 2, right: 4, bottom: 4, left: 3, owner: 1)
             ]
         default:
