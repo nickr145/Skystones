@@ -51,8 +51,8 @@ class GameViewModel: ObservableObject {
         Skystone(top: 3, right: 2, bottom: 3, left: 1, owner: 2),
         Skystone(top: 2, right: 3, bottom: 1, left: 3, owner: 2),
         Skystone(top: 3, right: 3, bottom: 2, left: 1, owner: 2),
-        Skystone(top: 1, right: 3, bottom: 3, left: 2, owner: 2),
-        Skystone(top: 3, right: 1, bottom: 3, left: 2, owner: 2)
+        Skystone(top: 4, right: 3, bottom: 3, left: 2, owner: 2),
+        Skystone(top: 2, right: 4, bottom: 3, left: 2, owner: 2)
     ]
     private var level4Pieces: [Skystone] = [
         Skystone(top: 3, right: 4, bottom: 2, left: 3, owner: 2),
@@ -66,7 +66,40 @@ class GameViewModel: ObservableObject {
         Skystone(top: 4, right: 4, bottom: 4, left: 3, owner: 2),
         Skystone(top: 3, right: 4, bottom: 4, left: 4, owner: 2),
         Skystone(top: 4, right: 3, bottom: 4, left: 4, owner: 2),
-        Skystone(top: 4, right: 4, bottom: 4, left: 4, owner: 2)
+        Skystone(top: 4, right: 4, bottom: 2, left: 4, owner: 2)
+    ]
+    
+    private var player1PiecesForEachDifficulty: [[Skystone]] = [
+        [Skystone(top: 1, right: 2, bottom: 1, left: 0, owner: 1),
+         Skystone(top: 2, right: 1, bottom: 2, left: 0, owner: 1),
+         Skystone(top: 1, right: 3, bottom: 0, left: 1, owner: 1),
+         Skystone(top: 2, right: 2, bottom: 1, left: 1, owner: 1),
+         Skystone(top: 1, right: 2, bottom: 1, left: 2, owner: 1)
+        ],
+        [Skystone(top: 2, right: 3, bottom: 1, left: 2, owner: 1),
+         Skystone(top: 3, right: 2, bottom: 1, left: 1, owner: 1),
+         Skystone(top: 2, right: 2, bottom: 2, left: 0, owner: 1),
+         Skystone(top: 1, right: 3, bottom: 3, left: 1, owner: 1),
+         Skystone(top: 2, right: 2, bottom: 3, left: 1, owner: 1)
+        ],
+        [Skystone(top: 2, right: 3, bottom: 2, left: 2, owner: 1),
+         Skystone(top: 3, right: 3, bottom: 1, left: 2, owner: 1),
+         Skystone(top: 3, right: 1, bottom: 3, left: 2, owner: 1),
+         Skystone(top: 2, right: 3, bottom: 2, left: 2, owner: 1),
+         Skystone(top: 1, right: 2, bottom: 3, left: 1, owner: 1)
+        ],
+        [Skystone(top: 3, right: 2, bottom: 3, left: 1, owner: 1),
+         Skystone(top: 2, right: 3, bottom: 3, left: 2, owner: 1),
+         Skystone(top: 4, right: 3, bottom: 2, left: 2, owner: 1),
+         Skystone(top: 1, right: 2, bottom: 3, left: 2, owner: 1),
+         Skystone(top: 2, right: 1, bottom: 4, left: 2, owner: 1)
+        ],
+        [Skystone(top: 3, right: 3, bottom: 3, left: 2, owner: 1),
+         Skystone(top: 1, right: 3, bottom: 4, left: 1, owner: 1),
+         Skystone(top: 2, right: 2, bottom: 3, left: 3, owner: 1),
+         Skystone(top: 3, right: 3, bottom: 3, left: 3, owner: 1),
+         Skystone(top: 2, right: 4, bottom: 4, left: 3, owner: 1)
+        ]
     ]
     
     var selectedDifficulty: Int = 1
@@ -83,58 +116,22 @@ class GameViewModel: ObservableObject {
         switch selectedDifficulty {
         case 1:
             player2Pieces = level1Pieces
-            player1Pieces = [
-                Skystone(top: 1, right: 2, bottom: 1, left: 0, owner: 1),
-                Skystone(top: 2, right: 1, bottom: 2, left: 0, owner: 1),
-                Skystone(top: 1, right: 3, bottom: 0, left: 1, owner: 1),
-                Skystone(top: 2, right: 2, bottom: 1, left: 1, owner: 1),
-                Skystone(top: 1, right: 2, bottom: 1, left: 2, owner: 1)
-            ]
+            player1Pieces = player1PiecesForEachDifficulty[0]
         case 2:
             player2Pieces = level2Pieces
-            player1Pieces = [
-                Skystone(top: 2, right: 3, bottom: 1, left: 2, owner: 1),
-                Skystone(top: 3, right: 2, bottom: 1, left: 1, owner: 1),
-                Skystone(top: 2, right: 2, bottom: 2, left: 0, owner: 1),
-                Skystone(top: 1, right: 3, bottom: 3, left: 1, owner: 1),
-                Skystone(top: 2, right: 2, bottom: 3, left: 1, owner: 1)
-            ]
+            player1Pieces = player1PiecesForEachDifficulty[1]
         case 3:
             player2Pieces = level3Pieces
-            player1Pieces = [
-                Skystone(top: 2, right: 3, bottom: 2, left: 2, owner: 1),
-                Skystone(top: 3, right: 3, bottom: 1, left: 2, owner: 1),
-                Skystone(top: 3, right: 1, bottom: 3, left: 2, owner: 1),
-                Skystone(top: 2, right: 3, bottom: 2, left: 2, owner: 1),
-                Skystone(top: 1, right: 2, bottom: 3, left: 1, owner: 1)
-            ]
+            player1Pieces = player1PiecesForEachDifficulty[2]
         case 4:
             player2Pieces = level4Pieces
-            player1Pieces = [
-                Skystone(top: 3, right: 2, bottom: 3, left: 1, owner: 1),
-                Skystone(top: 2, right: 3, bottom: 3, left: 2, owner: 1),
-                Skystone(top: 3, right: 3, bottom: 2, left: 2, owner: 1),
-                Skystone(top: 1, right: 2, bottom: 3, left: 2, owner: 1),
-                Skystone(top: 2, right: 1, bottom: 3, left: 2, owner: 1)
-            ]
+            player1Pieces = player1PiecesForEachDifficulty[3]
         case 5:
             player2Pieces = level5Pieces
-            player1Pieces = [
-                Skystone(top: 3, right: 3, bottom: 3, left: 2, owner: 1),
-                Skystone(top: 1, right: 3, bottom: 4, left: 1, owner: 1),
-                Skystone(top: 2, right: 2, bottom: 3, left: 3, owner: 1),
-                Skystone(top: 3, right: 3, bottom: 3, left: 3, owner: 1),
-                Skystone(top: 2, right: 4, bottom: 4, left: 3, owner: 1)
-            ]
+            player1Pieces = player1PiecesForEachDifficulty[4]
         default:
             player2Pieces = level1Pieces
-            player1Pieces = [
-                Skystone(top: 1, right: 2, bottom: 1, left: 0, owner: 1),
-                Skystone(top: 2, right: 1, bottom: 2, left: 0, owner: 1),
-                Skystone(top: 1, right: 3, bottom: 0, left: 1, owner: 1),
-                Skystone(top: 2, right: 2, bottom: 1, left: 1, owner: 1),
-                Skystone(top: 1, right: 2, bottom: 1, left: 2, owner: 1)
-            ]
+            player1Pieces = player1PiecesForEachDifficulty[0]
         }
     }
     
