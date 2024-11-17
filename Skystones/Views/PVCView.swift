@@ -47,7 +47,7 @@ struct PVCView: View {
         }
         .onAppear {
             viewModel.setupComputerDifficulty(difficulty)
-            audioManager.playAudio(named: viewModel.musicDifficultyStrings[difficulty])
+            audioManager.playAudio(named: viewModel.musicDifficultyStrings[difficulty-1])
         }
         .onDisappear {
             audioManager.stopAudio()

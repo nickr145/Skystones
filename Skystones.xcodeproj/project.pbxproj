@@ -35,6 +35,7 @@
 		5B2089FA2CC4BF370064028E /* TitleMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089F92CC4BF370064028E /* TitleMusic.mp3 */; };
 		5B2089FD2CC4C8C40064028E /* InstructionsMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089FC2CC4C8C40064028E /* InstructionsMusic.mp3 */; };
 		5B208A1D2CDF2F0C0064028E /* DifficultySelectionMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5B208A1C2CDF2F0C0064028E /* DifficultySelectionMusic.mp3 */; };
+		5B208A1F2CE92A9E0064028E /* Quigley.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5B208A1E2CE92A9E0064028E /* Quigley.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		5B2089F92CC4BF370064028E /* TitleMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TitleMusic.mp3; sourceTree = "<group>"; };
 		5B2089FC2CC4C8C40064028E /* InstructionsMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = InstructionsMusic.mp3; sourceTree = "<group>"; };
 		5B208A1C2CDF2F0C0064028E /* DifficultySelectionMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DifficultySelectionMusic.mp3; sourceTree = "<group>"; };
+		5B208A1E2CE92A9E0064028E /* Quigley.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Quigley.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				5B2089F92CC4BF370064028E /* TitleMusic.mp3 */,
 				5B2089FC2CC4C8C40064028E /* InstructionsMusic.mp3 */,
 				5B208A1C2CDF2F0C0064028E /* DifficultySelectionMusic.mp3 */,
+				5B208A1E2CE92A9E0064028E /* Quigley.mp3 */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B2089E12CAB3FC80064028E /* portal.gif in Resources */,
+				5B208A1F2CE92A9E0064028E /* Quigley.mp3 in Resources */,
 				5B2089FA2CC4BF370064028E /* TitleMusic.mp3 in Resources */,
 				5B2089F42CC4B7F90064028E /* Level3Music.mp3 in Resources */,
 				5B2089FD2CC4C8C40064028E /* InstructionsMusic.mp3 in Resources */,

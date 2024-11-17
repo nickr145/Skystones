@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 
 class GameViewModel: ObservableObject {
-    @Published var difficultyImageStrings = ["skystones-level1", "skystones-level2", "skystones-level3", "skystones-level4", "skystones-level5"]
-    @Published var musicDifficultyStrings = ["Level1Music", "Level2Music", "Level3Music", "Level4Music", "Level5Music"]
+    @Published var difficultyImageStrings = ["skystones-level1", "skystones-level2", "skystones-level3", "skystones-level4", "skystones-level5", "skystones-level6"]
+    @Published var difficultyLevelNameStrings = ["Chompy", "Drow Lance Master", "Goliath Drow", "Arkeyan War Machine", "Kaos", "Quigley"]
+    @Published var musicDifficultyStrings = ["Level1Music", "Level2Music", "Level3Music", "Level4Music", "Level5Music", "Quigley"]
     
     @Published var board: [Skystone?] = Array(repeating: nil, count: 9)
     @Published var player1Pieces: [Skystone] = [
@@ -62,11 +64,18 @@ class GameViewModel: ObservableObject {
         Skystone(top: 3, right: 3, bottom: 4, left: 3, owner: 2)
     ]
     private var level5Pieces: [Skystone] = [
-        Skystone(top: 4, right: 4, bottom: 3, left: 4, owner: 2),
-        Skystone(top: 4, right: 4, bottom: 4, left: 3, owner: 2),
-        Skystone(top: 3, right: 4, bottom: 4, left: 4, owner: 2),
-        Skystone(top: 4, right: 3, bottom: 4, left: 4, owner: 2),
+        Skystone(top: 3, right: 4, bottom: 3, left: 4, owner: 2),
+        Skystone(top: 4, right: 2, bottom: 4, left: 3, owner: 2),
+        Skystone(top: 3, right: 4, bottom: 3, left: 4, owner: 2),
+        Skystone(top: 0, right: 3, bottom: 4, left: 4, owner: 2),
         Skystone(top: 4, right: 4, bottom: 2, left: 4, owner: 2)
+    ]
+    private var level6Pieces: [Skystone] = [
+        Skystone(top: 3, right: 3, bottom: 3, left: 4, owner: 2),
+        Skystone(top: 3, right: 4, bottom: 5, left: 3, owner: 2),
+        Skystone(top: 4, right: 4, bottom: 4, left: 4, owner: 2),
+        Skystone(top: 5, right: 3, bottom: 3, left: 3, owner: 2),
+        Skystone(top: 3, right: 4, bottom: 4, left: 4, owner: 2),
     ]
     
     private var player1PiecesForEachDifficulty: [[Skystone]] = [
@@ -99,6 +108,12 @@ class GameViewModel: ObservableObject {
          Skystone(top: 2, right: 2, bottom: 3, left: 3, owner: 1),
          Skystone(top: 3, right: 3, bottom: 3, left: 3, owner: 1),
          Skystone(top: 2, right: 4, bottom: 4, left: 3, owner: 1)
+        ],
+        [Skystone(top: 3, right: 3, bottom: 4, left: 4, owner: 1),
+         Skystone(top: 4, right: 4, bottom: 4, left: 3, owner: 1),
+         Skystone(top: 3, right: 3, bottom: 3, left: 3, owner: 1),
+         Skystone(top: 4, right: 3, bottom: 3, left: 4, owner: 1),
+         Skystone(top: 3, right: 4, bottom: 3, left: 3, owner: 1)
         ]
     ]
     
@@ -129,6 +144,9 @@ class GameViewModel: ObservableObject {
         case 5:
             player2Pieces = level5Pieces
             player1Pieces = player1PiecesForEachDifficulty[4]
+        case 6:
+            player2Pieces = level6Pieces
+            player1Pieces = player1PiecesForEachDifficulty[5]
         default:
             player2Pieces = level1Pieces
             player1Pieces = player1PiecesForEachDifficulty[0]
@@ -148,6 +166,8 @@ class GameViewModel: ObservableObject {
             Lvl4ComputerMove()  // MiniMax algorithm, depth limited
         case 5:
             Lvl5ComputerMove()  // MiniMax with Alpha-Beta pruning
+        case 6:
+            Lvl5ComputerMove()
         default:
             Lvl1ComputerMove()  // Default to level 1 if not specified
         }
@@ -155,10 +175,10 @@ class GameViewModel: ObservableObject {
     
     func Lvl1ComputerMove() {
         let availableCells = board.indices.filter { board[$0] == nil }
-
+        
         // Ensure the computer has pieces left to place
         guard !player2Pieces.isEmpty, let randomCell = availableCells.randomElement() else { return }
-
+        
         // Pick a random piece from player2's available pieces
         if let randomPiece = player2Pieces.randomElement() {
             selectedPiece = randomPiece
@@ -169,12 +189,12 @@ class GameViewModel: ObservableObject {
     // Level 2 AI: Avoid bad spots, basic capture logic
     func Lvl2ComputerMove() {
         let availableCells = board.indices.filter { board[$0] == nil }
-
+        
         // Basic heuristic: avoid edges or spots where capture is easy
         let prioritizedCells = availableCells.filter { $0 != 0 && $0 != 2 && $0 != 6 && $0 != 8 }
-
+        
         let cellToPlace = prioritizedCells.isEmpty ? availableCells.randomElement() : prioritizedCells.randomElement()
-
+        
         if let randomPiece = player2Pieces.randomElement(), let cell = cellToPlace {
             selectedPiece = randomPiece
             placeSelectedPiece(at: cell)
@@ -229,7 +249,7 @@ class GameViewModel: ObservableObject {
         
         var bestScore = Int.min
         var bestMove: (cell: Int, piece: Skystone)?
-
+        
         for cell in availableCells {
             if let randomPiece = player2Pieces.randomElement() {
                 // Simulate placing the piece and calculate the score
@@ -247,6 +267,78 @@ class GameViewModel: ObservableObject {
             placeSelectedPiece(at: bestMove.cell)
         }
     }
+    
+    func Lvl6ComputerMove() {
+        guard currentPlayer == 2, !isGameOver else { return }
+        
+        var bestMove: (index: Int, piece: Skystone)? = nil
+        var maxScoreDifference = Int.min
+        
+        // Loop through all available board positions
+        for (index, tile) in board.enumerated() where tile == nil {
+            // Try every piece in player2Pieces
+            for piece in player2Pieces {
+                // Simulate placing the piece
+                var simulatedBoard = board
+                simulatedBoard[index] = piece
+                
+                // Simulate capturing opponent pieces
+                let capturedPieces = simulateCaptures(for: piece, at: index, on: simulatedBoard)
+                
+                // Calculate score difference
+                let aiScore = simulatedBoard.filter { $0?.owner == 2 }.count
+                let playerScore = simulatedBoard.filter { $0?.owner == 1 }.count
+                let scoreDifference = aiScore - playerScore
+                
+                // Update the best move if this one is better
+                if scoreDifference > maxScoreDifference {
+                    maxScoreDifference = scoreDifference
+                    bestMove = (index, piece)
+                }
+            }
+        }
+        
+        // Execute the best move
+        if let bestMove = bestMove {
+            // Set the selected piece for the computer
+            selectedPiece = bestMove.piece
+            placeSelectedPiece(at: bestMove.index)
+            currentPlayer = 1
+            updateScores()
+        }
+    }
+    
+    
+    private func simulateCaptures(for piece: Skystone, at index: Int, on board: [Skystone?]) -> [Int] {
+        let directions: [(offset: Int, checkIndex: Int)] = [
+            (-3, index - 3),  // Top
+            (3, index + 3),   // Bottom
+            (-1, index - 1),  // Left
+            (1, index + 1)    // Right
+        ]
+        
+        var capturedIndices: [Int] = []
+        
+        for (offset, checkIndex) in directions {
+            guard checkIndex >= 0, checkIndex < board.count else { continue }
+            guard let adjacentPiece = board[checkIndex], adjacentPiece.owner != piece.owner else { continue }
+            
+            // Compare values in the appropriate direction
+            let isCapture = (
+                (offset == -3 && piece.top > adjacentPiece.bottom) ||    // Top
+                (offset == 3 && piece.bottom > adjacentPiece.top) ||     // Bottom
+                (offset == -1 && piece.left > adjacentPiece.right) ||    // Left
+                (offset == 1 && piece.right > adjacentPiece.left)        // Right
+            )
+            
+            if isCapture {
+                capturedIndices.append(checkIndex)
+            }
+        }
+        
+        return capturedIndices
+    }
+    
     
     // Logic for being able to capture adjacent cells with a given piece for level 3 AI
     func canCaptureAdjacent(at index: Int, with piece: Skystone) -> Bool {
@@ -278,7 +370,7 @@ class GameViewModel: ObservableObject {
         let bottomCapture = bottomIndex < board.count && board[bottomIndex]?.owner == 1 && piece.canCapture(board[bottomIndex]!, direction: .bottom)
         let leftCapture = cell % 3 != 0 && board[leftIndex]?.owner == 1 && piece.canCapture(board[leftIndex]!, direction: .left)
         let rightCapture = cell % 3 != 2 && board[rightIndex]?.owner == 1 && piece.canCapture(board[rightIndex]!, direction: .right)
-
+        
         return topCapture || bottomCapture || leftCapture || rightCapture
     }
     
@@ -291,35 +383,35 @@ class GameViewModel: ObservableObject {
         // Calculate the score based on captured stones
         return capturedStones
     }
-
+    
     // Logic to identify all capturable stones at a place in the board for level 5 AI
     func captureSimulatedStones(at index: Int, board: [Skystone?]) -> Int {
         let stone = board[index]!
         var capturedCount = 0
-
+        
         // Capture top stone
         if index >= 3, let topStone = board[index - 3], stone.canCapture(topStone, direction: .top) {
             capturedCount += 1
         }
-
+        
         // Capture bottom stone
         if index <= 5, let bottomStone = board[index + 3], stone.canCapture(bottomStone, direction: .bottom) {
             capturedCount += 1
         }
-
+        
         // Capture left stone
         if index % 3 != 0, let leftStone = board[index - 1], stone.canCapture(leftStone, direction: .left) {
             capturedCount += 1
         }
-
+        
         // Capture right stone
         if index % 3 != 2, let rightStone = board[index + 1], stone.canCapture(rightStone, direction: .right) {
             capturedCount += 1
         }
-
+        
         return capturedCount
     }
-
+    
     
     func placeSelectedPiece(at index: Int) {
         guard board[index] == nil, let selectedPiece = selectedPiece else { return }
@@ -340,7 +432,7 @@ class GameViewModel: ObservableObject {
         
         // Reset selected piece
         self.selectedPiece = nil
-
+        
         if checkGameOver() {
             isGameOver = true
             winner = calculateWinner()
@@ -350,7 +442,7 @@ class GameViewModel: ObservableObject {
         
         updateScores()
     }
-
+    
     
     func placeStone(at index: Int) {
         guard board[index] == nil else { return }
@@ -367,48 +459,59 @@ class GameViewModel: ObservableObject {
             currentPlayer = currentPlayer == 1 ? 2 : 1
         }
     }
-
+    
     func captureAdjacentStones(at index: Int) {
         let stone = board[index]!
-
+        
         // Capture top stone
         if index >= 3, let topStone = board[index - 3], stone.canCapture(topStone, direction: .top) {
             board[index - 3]?.owner = stone.owner
         }
-
+        
         // Capture bottom stone
         if index <= 5, let bottomStone = board[index + 3], stone.canCapture(bottomStone, direction: .bottom) {
             board[index + 3]?.owner = stone.owner
         }
-
+        
         // Capture left stone
         if index % 3 != 0, let leftStone = board[index - 1], stone.canCapture(leftStone, direction: .left) {
             board[index - 1]?.owner = stone.owner
         }
-
+        
         // Capture right stone
         if index % 3 != 2, let rightStone = board[index + 1], stone.canCapture(rightStone, direction: .right) {
             board[index + 1]?.owner = stone.owner
         }
     }
-
+    
     
     func resetGame() {
         board = Array(repeating: nil, count: 9)
-        player1Pieces = [
-            Skystone(top: 2, right: 3, bottom: 1, left: 4, owner: 1),
-            Skystone(top: 3, right: 4, bottom: 2, left: 1, owner: 1),
-            Skystone(top: 1, right: 2, bottom: 3, left: 4, owner: 1),
-            Skystone(top: 4, right: 1, bottom: 2, left: 3, owner: 1),
-            Skystone(top: 2, right: 1, bottom: 4, left: 3, owner: 1)
-        ]
-        player2Pieces = [
-            Skystone(top: 1, right: 3, bottom: 2, left: 4, owner: 2),
-            Skystone(top: 2, right: 4, bottom: 3, left: 1, owner: 2),
-            Skystone(top: 4, right: 2, bottom: 1, left: 3, owner: 2),
-            Skystone(top: 3, right: 1, bottom: 4, left: 2, owner: 2),
-            Skystone(top: 1, right: 2, bottom: 4, left: 3, owner: 2)
-        ]
+        
+        switch selectedDifficulty {
+        case 1:
+            player2Pieces = level1Pieces
+            player1Pieces = player1PiecesForEachDifficulty[0]
+        case 2:
+            player2Pieces = level2Pieces
+            player1Pieces = player1PiecesForEachDifficulty[1]
+        case 3:
+            player2Pieces = level3Pieces
+            player1Pieces = player1PiecesForEachDifficulty[2]
+        case 4:
+            player2Pieces = level4Pieces
+            player1Pieces = player1PiecesForEachDifficulty[3]
+        case 5:
+            player2Pieces = level5Pieces
+            player1Pieces = player1PiecesForEachDifficulty[4]
+        case 6:
+            player2Pieces = level6Pieces
+            player1Pieces = player1PiecesForEachDifficulty[5]
+        default:
+            player2Pieces = level1Pieces
+            player1Pieces = player1PiecesForEachDifficulty[0]
+        }
+        
         currentPlayer = 1
         isGameOver = false
         winner = nil

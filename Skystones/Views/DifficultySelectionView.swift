@@ -15,6 +15,7 @@ struct DifficultySelectionView: View {
     @Binding var showPVCView: Bool
     @State private var showGameView = false
     @State private var selectedDifficulty: Int = 1
+
     
     var body: some View {
         ZStack {
@@ -29,18 +30,18 @@ struct DifficultySelectionView: View {
                         Text("Back")
                             .font(.headline)
                             .padding()
-                            .foregroundColor(.green)
+                            .foregroundStyle(.green)
                             .border(Color.green)
                     }
                     Text("Select Difficulty")
                         .font(.largeTitle)
                         .padding()
-                        .foregroundColor(.red)
+                        .foregroundStyle(.red)
                         .border(Color.red)
                 }
                 
                 Picker("Difficulty", selection: $selectedDifficulty) {
-                    ForEach(1..<6) { level in
+                    ForEach(1..<7, id: \.self) { level in
                         Text("Level \(level)")
                             .foregroundColor(.white)
                     }
@@ -48,8 +49,12 @@ struct DifficultySelectionView: View {
                 .pickerStyle(WheelPickerStyle())
                 .padding()
                 
-                Image(viewModel.difficultyImageStrings[selectedDifficulty])
-                    .padding(60)
+                Text("\(viewModel.difficultyLevelNameStrings[selectedDifficulty-1])")
+                    .foregroundStyle((selectedDifficulty < 3 ? .green : (selectedDifficulty < 5 ? .yellow : .red)))
+                
+                
+                Image(viewModel.difficultyImageStrings[selectedDifficulty-1])
+                    .padding(10)
                 
                 Spacer()
                 
@@ -60,7 +65,7 @@ struct DifficultySelectionView: View {
                     Text("Start Game")
                         .font(.title)
                         .padding()
-                        .foregroundColor(.blue)
+                        .foregroundStyle(.blue)
                         .border(Color.blue)
                     
                 }
