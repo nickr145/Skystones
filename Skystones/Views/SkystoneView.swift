@@ -10,6 +10,52 @@ import SwiftUI
 struct SkystoneView: View {
     var skystone: Skystone
     
+    private enum Constants {
+        static let player1Owner = 1
+        static let blueOpacity = 0.7
+        static let redOpacity = 0.7
+        static let tileCornerRadius = 10
+    }
+    
+    var top: some View {
+        Text("\(skystone.top)").font(.headline)
+            .bold()
+    }
+    
+    var left: some View {
+        Text("\(skystone.left)").font(.headline)
+            .bold()
+    }
+    
+    var right: some View {
+        Text("\(skystone.right)").font(.headline)
+            .bold()
+    }
+    
+    var bottom: some View {
+        Text("\(skystone.bottom)").font(.headline)
+            .bold()
+    }
+    
+    var skystoneTile: some View {
+        VStack {
+            top
+            HStack {
+                left
+                right
+            }
+            bottom
+        }
+        .padding()
+        // Blue for Player 1, Red for Player 2
+        .background(skystone.owner == Constants.player1Owner ?
+                    Color.blue.opacity(Constants.blueOpacity) :
+                        Color.red.opacity(Constants.redOpacity))
+        .cornerRadius(CGFloat(Constants.tileCornerRadius))
+    }
+    
+    
+    
     var body: some View {
         VStack {
             Text("\(skystone.top)").font(.headline)
@@ -26,8 +72,11 @@ struct SkystoneView: View {
         }
         .padding()
         // Blue for Player 1, Red for Player 2
-        .background(skystone.owner == 1 ? Color.blue.opacity(0.7) : Color.red.opacity(0.7))
-        .cornerRadius(10)
+        .background(skystone.owner == Constants.player1Owner ?
+                    Color.blue.opacity(Constants.blueOpacity) :
+                        Color.red.opacity(Constants.redOpacity))
+        .cornerRadius(CGFloat(Constants.tileCornerRadius))
+        
     }
 }
 

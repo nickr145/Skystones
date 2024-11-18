@@ -15,60 +15,83 @@ struct GameBoardView: View {
         GridItem(.flexible())
     ]
     var showComputerPieces: Bool
+    
+    private enum Constants {
+        static let player1String = "Player 1"
+        static let player2String = "Player 2"
+    }
+    
+    var player1WithScore: some View {
+        VStack {
+            Text(Constants.player1String)
+                .font(.headline)
+                .foregroundColor(.blue)
+            Text("\(viewModel.player1Score)")
+                .font(.largeTitle)
+                .foregroundColor(.blue)
+        }
+    }
+    
+    var player2WithScore: some View {
+        VStack {
+            Text(Constants.player2String)
+                .font(.headline)
+                .foregroundColor(.red)
+            Text("\(viewModel.player2Score)")
+                .font(.largeTitle)
+                .foregroundColor(.red)
+        }
+    }
+    
+    var playerAndScoreTile: some View {
+        HStack {
+            player1WithScore
+            Spacer()
+            player2WithScore
+        }
+        .padding()
+        .background(Color.gray.opacity(0.2))
+        .cornerRadius(10)
+        .padding()
+    }
+    
+    var boardGrid: some View {
+        LazyVGrid(columns: columns, spacing: 10) {
+            ForEach(viewModel.board.indices, id: \.self) { index in
+                Group {
+                    if let skystone = viewModel.board[index] {
+                        SkystoneView(skystone: skystone)
+                    } else {
+                        EmptyCellView(index: index, onTap: {
+                            if let selectedPiece = viewModel.selectedPiece {
+                                viewModel.placeSelectedPiece(at: index)
+                            }
+                        })
+                    }
+                }
+            }
+        }
+        .padding()
+        .alert(isPresented: $viewModel.isGameOver) {
+            Alert(
+                title: Text("Game Over"),
+                message: Text("Player \(viewModel.winner ?? 0) Wins!"),
+                dismissButton: .default(Text("OK")) {
+                    viewModel.resetGame()
+                }
+            )
+        }
+    }
+    
+    var pieceselect: some View {
+        PieceSelectionView(viewModel: viewModel, showComputerPieces: showComputerPieces)
+    }
 
     var body: some View {
         VStack {
-            HStack {
-                VStack {
-                    Text("Player 1")
-                        .font(.headline)
-                        .foregroundColor(.blue)
-                    Text("\(viewModel.player1Score)")
-                        .font(.largeTitle)
-                        .foregroundColor(.blue)
-                }
-                Spacer()
-                VStack {
-                    Text("Player 2")
-                        .font(.headline)
-                        .foregroundColor(.red)
-                    Text("\(viewModel.player2Score)")
-                        .font(.largeTitle)
-                        .foregroundColor(.red)
-                }
-            }
-            .padding()
-            .background(Color.gray.opacity(0.2))
-            .cornerRadius(10)
-            .padding()
-            // Board Grid
-            LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(viewModel.board.indices, id: \.self) { index in
-                    Group {
-                        if let skystone = viewModel.board[index] {
-                            SkystoneView(skystone: skystone)
-                        } else {
-                            EmptyCellView(index: index, onTap: {
-                                if let selectedPiece = viewModel.selectedPiece {
-                                    viewModel.placeSelectedPiece(at: index)
-                                }
-                            })
-                        }
-                    }
-                }
-            }
-            .padding()
-            .alert(isPresented: $viewModel.isGameOver) {
-                Alert(
-                    title: Text("Game Over"),
-                    message: Text("Player \(viewModel.winner ?? 0) Wins!"),
-                    dismissButton: .default(Text("OK")) {
-                        viewModel.resetGame()
-                    }
-                )
-            }
-            // Piece Selection
-            PieceSelectionView(viewModel: viewModel, showComputerPieces: showComputerPieces)
+            playerAndScoreTile
+            boardGrid
+            pieceselect
         }
     }
 }

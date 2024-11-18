@@ -11,13 +11,22 @@ struct EmptyCellView: View {
     var index: Int
     var onTap: () -> Void 
     
-    var body: some View {
+    private enum Constants {
+        static let rectangleForegroundColorOpacity = 0.2
+        static let rectangleHeight = 100
+    }
+    
+    var rectangleView: some View {
         Rectangle()
-            .foregroundColor(.gray.opacity(0.2))
-            .frame(height: 100)
+            .foregroundColor(.gray.opacity(Constants.rectangleForegroundColorOpacity))
+            .frame(height: CGFloat(Constants.rectangleHeight))
             .onTapGesture {
                 onTap()
             }
+    }
+    
+    var body: some View {
+        rectangleView
     }
 }
 

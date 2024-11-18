@@ -7,75 +7,122 @@
 
 import SwiftUI
 
+class DifficultySelectionViewModel: ObservableObject {
+    @Published var selectedDifficulty: Int = 1
+    @Published var showGameView = false
+}
+
 struct DifficultySelectionView: View {
     @StateObject var audioManager = AudioPlayerManager()
     @StateObject var viewModel = GameViewModel()
+    @StateObject var difficultySelectionViewModel = DifficultySelectionViewModel()
     
     @Environment(\.dismiss) var dismiss
     @Binding var showPVCView: Bool
-    @State private var showGameView = false
-    @State private var selectedDifficulty: Int = 1
-
+    
+    private enum Constants {
+        static let backButtonString = "Back"
+        static let selectDifficultyString = "Select Difficulty"
+        static let difficultyPickerString = "Difficulty"
+        static let startGameString = "Start Game"
+        static let difficultySelectionMusicString = "DifficultySelectionMusic"
+        static let difficultyLessThan3 = 3
+        static let difficultyLessThan5 = 5
+        static let padding10 = 10.0
+    }
+    
+    var blackBackground: some View {
+        Color.black
+            .ignoresSafeArea()
+    }
+    
+    var backButtonView: some View {
+        Button(action: {
+            dismiss()
+        }) {
+            Text(Constants.backButtonString)
+                .font(.headline)
+                .padding()
+                .foregroundStyle(.green)
+                .border(Color.green)
+        }
+    }
+    
+    var selectDifficultyTextView: some View {
+        Text(Constants.selectDifficultyString)
+            .font(.largeTitle)
+            .padding()
+            .foregroundStyle(.red)
+            .border(Color.red)
+    }
+    
+    var pickerView: some View {
+        Picker(Constants.difficultyPickerString, selection: $difficultySelectionViewModel.selectedDifficulty) {
+            ForEach(1..<7, id: \.self) { level in
+                Text("Level \(level)")
+                    .foregroundColor(.white)
+            }
+        }
+        .pickerStyle(WheelPickerStyle())
+        .padding()
+    }
+    
+    var dynamicDifficultyLevelTextView: some View {
+        Text("\(viewModel.difficultyLevelNameStrings[difficultySelectionViewModel.selectedDifficulty-1])")
+            .foregroundStyle((difficultySelectionViewModel.selectedDifficulty < Constants.difficultyLessThan3 ? .green : (difficultySelectionViewModel.selectedDifficulty < Constants.difficultyLessThan5 ? .yellow : .red)))
+    }
+    
+    var dynamicDifficultyImageView: some View {
+        Image(viewModel.difficultyImageStrings[difficultySelectionViewModel.selectedDifficulty-1])
+            .padding(Constants.padding10)
+    }
+    
+    var spacerView: some View {
+        Spacer()
+    }
+    
+    var startGameButtonView: some View {
+        Button(action: {
+            difficultySelectionViewModel.showGameView = true
+            audioManager.stopAudio()
+        }) {
+            Text(Constants.startGameString)
+                .font(.title)
+                .padding()
+                .foregroundStyle(.blue)
+                .border(Color.blue)
+        }
+    }
+    
+    var diffSelectionVStack: some View {
+        VStack {
+            HStack {
+                backButtonView
+                selectDifficultyTextView
+            }
+            pickerView
+            dynamicDifficultyLevelTextView
+            dynamicDifficultyImageView
+            spacerView
+            
+            startGameButtonView
+        }
+    }
+    
+    var pvcView: some View {
+        PVCView(difficulty: difficultySelectionViewModel.selectedDifficulty, showPVCView: $showPVCView)
+    }
     
     var body: some View {
         ZStack {
-            Color.black
-                .ignoresSafeArea()
-            
-            VStack {
-                HStack {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Text("Back")
-                            .font(.headline)
-                            .padding()
-                            .foregroundStyle(.green)
-                            .border(Color.green)
-                    }
-                    Text("Select Difficulty")
-                        .font(.largeTitle)
-                        .padding()
-                        .foregroundStyle(.red)
-                        .border(Color.red)
-                }
-                
-                Picker("Difficulty", selection: $selectedDifficulty) {
-                    ForEach(1..<7, id: \.self) { level in
-                        Text("Level \(level)")
-                            .foregroundColor(.white)
-                    }
-                }
-                .pickerStyle(WheelPickerStyle())
-                .padding()
-                
-                Text("\(viewModel.difficultyLevelNameStrings[selectedDifficulty-1])")
-                    .foregroundStyle((selectedDifficulty < 3 ? .green : (selectedDifficulty < 5 ? .yellow : .red)))
-                
-                
-                Image(viewModel.difficultyImageStrings[selectedDifficulty-1])
-                    .padding(10)
-                
-                Spacer()
-                
-                Button(action: {
-                    showGameView = true
-                    audioManager.stopAudio()
-                }) {
-                    Text("Start Game")
-                        .font(.title)
-                        .padding()
-                        .foregroundStyle(.blue)
-                        .border(Color.blue)
-                    
-                }
-            }
-            .fullScreenCover(isPresented: $showGameView) {
-                PVCView(difficulty: selectedDifficulty, showPVCView: $showPVCView)
+            blackBackground
+            diffSelectionVStack
+            .fullScreenCover(isPresented: $difficultySelectionViewModel.showGameView) {
+                pvcView
             }
         }
         .onAppear {
-            audioManager.playAudio(named: "DifficultySelectionMusic")
+            audioManager.playAudio(named: Constants.difficultySelectionMusicString)
         }
     }
 }
