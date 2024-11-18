@@ -36,6 +36,8 @@
 		5B2089FD2CC4C8C40064028E /* InstructionsMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5B2089FC2CC4C8C40064028E /* InstructionsMusic.mp3 */; };
 		5B208A1D2CDF2F0C0064028E /* DifficultySelectionMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5B208A1C2CDF2F0C0064028E /* DifficultySelectionMusic.mp3 */; };
 		5B208A1F2CE92A9E0064028E /* Quigley.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5B208A1E2CE92A9E0064028E /* Quigley.mp3 */; };
+		5B87817E2CEB19E1001B041B /* GameStringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B87817D2CEB19E1001B041B /* GameStringConstants.swift */; };
+		5B8781802CEB1A28001B041B /* PlayerPiecesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B87817F2CEB1A28001B041B /* PlayerPiecesModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,8 @@
 		5B2089FC2CC4C8C40064028E /* InstructionsMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = InstructionsMusic.mp3; sourceTree = "<group>"; };
 		5B208A1C2CDF2F0C0064028E /* DifficultySelectionMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DifficultySelectionMusic.mp3; sourceTree = "<group>"; };
 		5B208A1E2CE92A9E0064028E /* Quigley.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Quigley.mp3; sourceTree = "<group>"; };
+		5B87817D2CEB19E1001B041B /* GameStringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStringConstants.swift; sourceTree = "<group>"; };
+		5B87817F2CEB1A28001B041B /* PlayerPiecesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPiecesModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				5B2089C42C9F5EC80064028E /* GameModel.swift */,
+				5B87817D2CEB19E1001B041B /* GameStringConstants.swift */,
+				5B87817F2CEB1A28001B041B /* PlayerPiecesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -268,11 +274,13 @@
 				5B2089C12C9E74E00064028E /* EmptyCellView.swift in Sources */,
 				5B2089BD2C9E6D210064028E /* SkystoneView.swift in Sources */,
 				5B2089DF2CA8FA380064028E /* PieceSelectionView.swift in Sources */,
+				5B8781802CEB1A28001B041B /* PlayerPiecesModel.swift in Sources */,
 				5B2089D12CA0F4310064028E /* TitleView.swift in Sources */,
 				5B2089D52CA24AB20064028E /* PVCView.swift in Sources */,
 				5B2089AD2C9E69D80064028E /* SkystonesApp.swift in Sources */,
 				5B2089C52C9F5EC80064028E /* GameModel.swift in Sources */,
 				5B2089BB2C9E6B2D0064028E /* GameBoardView.swift in Sources */,
+				5B87817E2CEB19E1001B041B /* GameStringConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

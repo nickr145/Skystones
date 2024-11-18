@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 class GameViewModel: ObservableObject {
-    @Published var difficultyImageStrings = ["skystones-level1", "skystones-level2", "skystones-level3", "skystones-level4", "skystones-level5", "skystones-level6"]
-    @Published var difficultyLevelNameStrings = ["Chompy", "Drow Lance Master", "Goliath Drow", "Arkeyan War Machine", "Kaos", "Quigley"]
-    @Published var musicDifficultyStrings = ["Level1Music", "Level2Music", "Level3Music", "Level4Music", "Level5Music", "Quigley"]
+    @Published var difficultyImageStrings = GameStringConstants.difficultyImageStrings
+    @Published var difficultyLevelNameStrings = GameStringConstants.difficultyLevelNameStrings
+    @Published var musicDifficultyStrings = GameStringConstants.musicDifficultyStrings
     
     @Published var board: [Skystone?] = Array(repeating: nil, count: 9)
     @Published var player1Pieces: [Skystone] = [
