@@ -12,38 +12,72 @@ struct PVCView: View {
     var difficulty: Int
     @StateObject var viewModel = GameViewModel()
     @Binding var showPVCView: Bool
+    
+    private enum Constants {
+        static let gifnameString = "BoardBG"
+        static let pvcNavTitleString = "PVC (Player vs Computer)"
+        static let backButtonString = "Back"
+        static let zIndex = 0
+        static let backButtonCornerRadius = 100
+        static let backButtonPadding = 70
+    }
+    
+    var blackBackground: some View {
+        Color.black
+            .ignoresSafeArea()
+    }
+    
+    var gifView: some View {
+        GIFView(gifName: Constants.gifnameString)
+            .scaledToFit()
+            .ignoresSafeArea()
+    }
+    
+    var gameBoardView: some View {
+        GameBoardView(viewModel: viewModel, showComputerPieces: false)
+            .navigationTitle(Constants.pvcNavTitleString)
+            .padding()
+            .background(Color.clear)
+            .zIndex(CGFloat(Constants.zIndex))
+    }
+    
+    var buttonTextView: some View {
+        Text(Constants.backButtonString)
+            .font(.footnote)
+            .padding()
+            .background(Color.green)
+            .foregroundColor(.black)
+            .cornerRadius(CGFloat(Constants.backButtonCornerRadius))
+    }
+    
+    var buttonView: some View {
+        Button(action: {
+            showPVCView = false // Dismiss the current view to return to TitleView
+        }) {
+            buttonTextView
+        }
+        .padding(.top, CGFloat(Constants.backButtonPadding))
+    }
+    
+    var spacerView: some View {
+        Spacer()
+    }
+    
+    var buttonVstack: some View {
+        VStack {
+            HStack {
+                buttonView
+            }
+            spacerView
+        }
+    }
 
     var body: some View {
         ZStack {
-            Color.black
-                .ignoresSafeArea()
-            
-            GIFView(gifName: "BoardBG")
-                .scaledToFit()
-                .ignoresSafeArea()
-
-            GameBoardView(viewModel: viewModel, showComputerPieces: false)
-                .navigationTitle("PVC (Player vs Computer)")
-                .padding()
-                .background(Color.clear)
-                .zIndex(0)
-            
-            VStack {
-                HStack {
-                    Button(action: {
-                        showPVCView = false // Dismiss the current view to return to TitleView
-                    }) {
-                        Text("Back")
-                            .font(.footnote)
-                            .padding()
-                            .background(Color.green)
-                            .foregroundColor(.black)
-                            .cornerRadius(100)
-                    }
-                    .padding(.top, 70)
-                }
-                Spacer()
-            }
+            blackBackground
+            gifView
+            gameBoardView
+            buttonVstack
         }
         .onAppear {
             viewModel.setupComputerDifficulty(difficulty)

@@ -28,8 +28,6 @@ struct TitleView: View {
         static let cornerRadius: CGFloat = 10
     }
     
-    // MARK: - State Objects
-    
     @StateObject var audioManager = AudioPlayerManager()
     @StateObject var viewModel = TitleViewModel()
     
@@ -140,11 +138,9 @@ struct TitleView: View {
 
     var body: some View {
         ZStack {
-            
             background
             gifView
             centeredGraphic
-            
             buttonVstack
         }
         .onAppear {

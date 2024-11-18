@@ -11,136 +11,189 @@ struct InstructionsView: View {
     @StateObject var audioManager = AudioPlayerManager()
     @Environment(\.dismiss) var dismiss  // For dismissing the view
     
+    private enum Constants {
+        static let HStackSpacing10 = 10.0
+        static let HStackSpacing20 = 20.0
+        static let VStackSpacing30 = 30.0
+        static let shadowRadius = 10.0
+        static let padding10 = 10.0
+        static let padding5 = 5.0
+        static let frameHeight = 100.0
+        static let frameWidth = 60.0
+        static let backButtonCornerRadius = 100.0
+        static let skystonesInstructionsString = "Skystones Instructions"
+        static let targetImageString = "target"
+        static let objectiveTitleString = "Objective"
+        static let objectiveString = "Capture as many stones as possible by strategically placing your pieces on the board."
+        static let gameControllerImageString = "gamecontroller.fill"
+        static let howToPlayString = "How to Play"
+        static let howToPlayBulletPointsString = """
+        - Players take turns placing their stones on the 3x3 board.
+        - Each stone has values on all four sides.
+        - When placed adjacent to an opponent’s stone, the values of the touching sides are compared.
+        - If your stone's side value is higher than the opponent’s, you capture their stone.
+        """
+        static let trophyImageString = "trophy.fill"
+        static let winningTheGameString = "Winning the Game"
+        static let gameEndsDescriptionString = "The game ends when the board is full. The player who controls the most stones at the end of the game wins."
+        static let listBulletRectangleImageString = "list.bullet.rectangle"
+        static let additionalRulesString = "Additional Rules"
+        static let additionalBulletPointsString = """
+        - If a player cannot place a stone, the turn is skipped.
+        - In Player vs Computer mode, the AI will automatically place a stone after Player 1’s turn.
+        """
+        static let backButtonString = "Back"
+        static let audioMusicString = "InstructionsMusic"
+        static let navTitleString = "Instructions"
+    }
+    
+    var blackBackground: some View {
+        Color.black
+            .ignoresSafeArea()
+    }
+    
+    var titleWithSkystone: some View {
+        HStack(spacing: Constants.HStackSpacing20) {
+            Text(Constants.skystonesInstructionsString)
+                .font(.largeTitle)
+                .bold()
+                .foregroundColor(.white)
+                .shadow(radius: Constants.shadowRadius)
+                .multilineTextAlignment(.center)
+                .padding(.bottom, Constants.padding10)
+            SkystoneView(skystone: Skystone(top: 2, right: 3, bottom: 1, left: 4, owner: 1))
+                .frame(width: Constants.frameWidth, height: Constants.frameHeight)
+                .padding(.leading, Constants.padding10)
+        }
+        .padding(.horizontal)
+    }
+    
+    var objectiveWithTargetImage: some View {
+        HStack(spacing: Constants.HStackSpacing10) {
+            Image(systemName: Constants.targetImageString)
+                .foregroundColor(.yellow)
+                .font(.title2)
+            Text(Constants.objectiveTitleString)
+                .font(.title2)
+                .bold()
+                .foregroundColor(.yellow)
+        }
+    }
+    
+    var objectiveText: some View {
+        Text(Constants.objectiveString)
+            .foregroundColor(.white)
+            .font(.body)
+            .padding(.bottom, Constants.padding5)
+            .multilineTextAlignment(.leading)
+    }
+    
+    var howToPlayWithGameController: some View {
+        HStack(spacing: Constants.HStackSpacing10) {
+            Image(systemName: Constants.gameControllerImageString)
+                .foregroundColor(.green)
+                .font(.title2)
+            Text(Constants.howToPlayString)
+                .font(.title2)
+                .bold()
+                .foregroundColor(.green)
+        }
+    }
+    
+    var howToPlayBulletPoints: some View {
+        Text(Constants.howToPlayBulletPointsString)
+        .foregroundColor(.white)
+        .font(.body)
+        .padding(.bottom, Constants.padding5)
+        .multilineTextAlignment(.leading)
+    }
+    
+    var winningSectionWithIcon: some View {
+        HStack(spacing: Constants.HStackSpacing10) {
+            Image(systemName: Constants.trophyImageString)
+                .foregroundColor(.orange)
+                .font(.title2)
+            
+            Text(Constants.winningTheGameString)
+                .font(.title2)
+                .bold()
+                .foregroundColor(.orange)
+        }
+    }
+    
+    var gameEndsDescription: some View {
+        Text(Constants.gameEndsDescriptionString)
+            .foregroundColor(.white)
+            .font(.body)
+            .padding(.bottom, Constants.padding5)
+            .multilineTextAlignment(.leading)
+    }
+    
+    var additionalRules: some View {
+        HStack(spacing: Constants.HStackSpacing10) {
+            Image(systemName: Constants.listBulletRectangleImageString)
+                .foregroundColor(.red)
+                .font(.title2)
+            
+            Text(Constants.additionalRulesString)
+                .font(.title2)
+                .bold()
+                .foregroundColor(.red)
+        }
+    }
+    
+    var additionalBulletPoints: some View {
+        Text(Constants.additionalBulletPointsString)
+        .foregroundColor(.white)
+        .font(.body)
+        .multilineTextAlignment(.leading)
+    }
+    
+    var backButton: some View {
+        Button(action: {
+            dismiss()
+        }) {
+            Text(Constants.backButtonString)
+                .font(.footnote)
+                .padding()
+                .background(Color.green)
+                .foregroundColor(.black)
+                .cornerRadius(Constants.backButtonCornerRadius)
+        }
+    }
+    
+    var instructionVStack: some View {
+        VStack(alignment: .leading, spacing: Constants.VStackSpacing30) {
+            titleWithSkystone
+            objectiveWithTargetImage
+            objectiveText
+            howToPlayWithGameController
+            howToPlayBulletPoints
+            winningSectionWithIcon
+            gameEndsDescription
+            additionalRules
+            additionalBulletPoints
+        }
+        .padding()
+    }
+    
     var body: some View {
         ZStack {
-            Color.black
-                .ignoresSafeArea()
+            blackBackground
 
             ScrollView {
-                VStack(alignment: .leading, spacing: 30) {
-                    
-                    // Title with shadow
-                    HStack(spacing: 20) {
-                        Text("Skystones Instructions")
-                            .font(.largeTitle)
-                            .bold()
-                            .foregroundColor(.white)
-                            .shadow(radius: 10)
-                            .multilineTextAlignment(.center)
-                            .padding(.bottom, 10)
-                        
-                        // Skystone view next to title
-                        
-                        SkystoneView(skystone: Skystone(top: 2, right: 3, bottom: 1, left: 4, owner: 1))
-                            .frame(width: 100, height: 60)
-                            .padding(.leading, 10)
-                    }
-                    .padding(.horizontal)
-
-                    
-                    // Objective section with icon
-                    HStack(spacing: 10) {
-                        Image(systemName: "target")
-                            .foregroundColor(.yellow)
-                            .font(.title2)
-                        
-                        Text("Objective")
-                            .font(.title2)
-                            .bold()
-                            .foregroundColor(.yellow)
-                    }
-                    
-                    Text("Capture as many stones as possible by strategically placing your pieces on the board.")
-                        .foregroundColor(.white)
-                        .font(.body)
-                        .padding(.bottom, 5)
-                        .multilineTextAlignment(.leading)
-                    
-                    // How to play section with bullet points and icon
-                    HStack(spacing: 10) {
-                        Image(systemName: "gamecontroller.fill")
-                            .foregroundColor(.green)
-                            .font(.title2)
-                        
-                        Text("How to Play")
-                            .font(.title2)
-                            .bold()
-                            .foregroundColor(.green)
-                    }
-                    
-                    Text("""
-                    - Players take turns placing their stones on the 3x3 board.
-                    - Each stone has values on all four sides.
-                    - When placed adjacent to an opponent’s stone, the values of the touching sides are compared.
-                    - If your stone's side value is higher than the opponent’s, you capture their stone.
-                    """)
-                    .foregroundColor(.white)
-                    .font(.body)
-                    .padding(.bottom, 5)
-                    .multilineTextAlignment(.leading)
-                    
-                    // Winning section with icon
-                    HStack(spacing: 10) {
-                        Image(systemName: "trophy.fill")
-                            .foregroundColor(.orange)
-                            .font(.title2)
-                        
-                        Text("Winning the Game")
-                            .font(.title2)
-                            .bold()
-                            .foregroundColor(.orange)
-                    }
-                    
-                    Text("The game ends when the board is full. The player who controls the most stones at the end of the game wins.")
-                        .foregroundColor(.white)
-                        .font(.body)
-                        .padding(.bottom, 5)
-                        .multilineTextAlignment(.leading)
-                    
-                    // Additional rules section with icon
-                    HStack(spacing: 10) {
-                        Image(systemName: "list.bullet.rectangle")
-                            .foregroundColor(.red)
-                            .font(.title2)
-                        
-                        Text("Additional Rules")
-                            .font(.title2)
-                            .bold()
-                            .foregroundColor(.red)
-                    }
-                    
-                    Text("""
-                    - If a player cannot place a stone, the turn is skipped.
-                    - In Player vs Computer mode, the AI will automatically place a stone after Player 1’s turn.
-                    """)
-                    .foregroundColor(.white)
-                    .font(.body)
-                    .multilineTextAlignment(.leading)
-                }
-                .padding()
-                
-                Button(action: {
-                    dismiss()
-                }) {
-                    Text("Back")
-                        .font(.footnote)
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.black)
-                        .cornerRadius(100)
-                }
-                
-                
+                instructionVStack
+                backButton
             }
             
         }
         .onAppear {
-            audioManager.playAudio(named: "InstructionsMusic")
+            audioManager.playAudio(named: Constants.audioMusicString)
         }
         .onDisappear {
             audioManager.stopAudio()
         }
-        .navigationTitle("Instructions")
+        .navigationTitle(Constants.navTitleString)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
