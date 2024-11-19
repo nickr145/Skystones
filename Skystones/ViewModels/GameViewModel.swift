@@ -12,22 +12,11 @@ class GameViewModel: ObservableObject {
     @Published var difficultyImageStrings = GameStringConstants.difficultyImageStrings
     @Published var difficultyLevelNameStrings = GameStringConstants.difficultyLevelNameStrings
     @Published var musicDifficultyStrings = GameStringConstants.musicDifficultyStrings
+    @Published var piecesModel = PlayerPiecesModel()
     
     @Published var board: [Skystone?] = Array(repeating: nil, count: 9)
-    @Published var player1Pieces: [Skystone] = [
-        Skystone(top: 3, right: 2, bottom: 3, left: 2, owner: 1),
-        Skystone(top: 2, right: 3, bottom: 2, left: 3, owner: 1),
-        Skystone(top: 4, right: 1, bottom: 3, left: 2, owner: 1),
-        Skystone(top: 2, right: 4, bottom: 2, left: 3, owner: 1),
-        Skystone(top: 3, right: 3, bottom: 2, left: 3, owner: 1)
-    ]
-    @Published var player2Pieces: [Skystone] = [
-        Skystone(top: 3, right: 2, bottom: 3, left: 2, owner: 2),
-        Skystone(top: 2, right: 3, bottom: 2, left: 3, owner: 2),
-        Skystone(top: 4, right: 1, bottom: 3, left: 2, owner: 2),
-        Skystone(top: 2, right: 4, bottom: 2, left: 3, owner: 2),
-        Skystone(top: 3, right: 3, bottom: 2, left: 3, owner: 2)
-    ]
+    @Published var player1Pieces: [Skystone]
+    @Published var player2Pieces: [Skystone]
     @Published var selectedPiece: Skystone?
     @Published var currentPlayer: Int = 1
     @Published var isGameOver: Bool = false
@@ -35,87 +24,27 @@ class GameViewModel: ObservableObject {
     @Published var player1Score: Int = 0
     @Published var player2Score: Int = 0
     
-    private var level1Pieces: [Skystone] = [
-        Skystone(top: 1, right: 0, bottom: 1, left: 2, owner: 2),
-        Skystone(top: 1, right: 1, bottom: 0, left: 2, owner: 2),
-        Skystone(top: 0, right: 2, bottom: 1, left: 1, owner: 2),
-        Skystone(top: 1, right: 1, bottom: 2, left: 0, owner: 2),
-        Skystone(top: 2, right: 0, bottom: 1, left: 1, owner: 2)
-    ]
-    private var level2Pieces: [Skystone] = [
-        Skystone(top: 2, right: 1, bottom: 2, left: 2, owner: 2),
-        Skystone(top: 2, right: 2, bottom: 1, left: 2, owner: 2),
-        Skystone(top: 1, right: 3, bottom: 2, left: 1, owner: 2),
-        Skystone(top: 2, right: 2, bottom: 2, left: 1, owner: 2),
-        Skystone(top: 3, right: 1, bottom: 2, left: 2, owner: 2)
-    ]
-    private var level3Pieces: [Skystone] = [
-        Skystone(top: 3, right: 2, bottom: 3, left: 1, owner: 2),
-        Skystone(top: 2, right: 3, bottom: 1, left: 3, owner: 2),
-        Skystone(top: 3, right: 3, bottom: 2, left: 1, owner: 2),
-        Skystone(top: 4, right: 3, bottom: 3, left: 2, owner: 2),
-        Skystone(top: 2, right: 4, bottom: 3, left: 2, owner: 2)
-    ]
-    private var level4Pieces: [Skystone] = [
-        Skystone(top: 3, right: 4, bottom: 2, left: 3, owner: 2),
-        Skystone(top: 4, right: 3, bottom: 4, left: 1, owner: 2),
-        Skystone(top: 3, right: 4, bottom: 3, left: 2, owner: 2),
-        Skystone(top: 4, right: 2, bottom: 3, left: 4, owner: 2),
-        Skystone(top: 3, right: 3, bottom: 4, left: 3, owner: 2)
-    ]
-    private var level5Pieces: [Skystone] = [
-        Skystone(top: 3, right: 4, bottom: 3, left: 4, owner: 2),
-        Skystone(top: 4, right: 2, bottom: 4, left: 3, owner: 2),
-        Skystone(top: 3, right: 4, bottom: 3, left: 4, owner: 2),
-        Skystone(top: 0, right: 3, bottom: 4, left: 4, owner: 2),
-        Skystone(top: 4, right: 4, bottom: 2, left: 4, owner: 2)
-    ]
-    private var level6Pieces: [Skystone] = [
-        Skystone(top: 3, right: 3, bottom: 3, left: 4, owner: 2),
-        Skystone(top: 3, right: 4, bottom: 5, left: 3, owner: 2),
-        Skystone(top: 4, right: 4, bottom: 4, left: 4, owner: 2),
-        Skystone(top: 5, right: 3, bottom: 3, left: 3, owner: 2),
-        Skystone(top: 3, right: 4, bottom: 4, left: 4, owner: 2),
-    ]
+    private var level1Pieces: [Skystone]
+    private var level2Pieces: [Skystone]
+    private var level3Pieces: [Skystone]
+    private var level4Pieces: [Skystone]
+    private var level5Pieces: [Skystone]
+    private var level6Pieces: [Skystone]
     
-    private var player1PiecesForEachDifficulty: [[Skystone]] = [
-        [Skystone(top: 1, right: 2, bottom: 1, left: 0, owner: 1),
-         Skystone(top: 2, right: 1, bottom: 2, left: 0, owner: 1),
-         Skystone(top: 1, right: 3, bottom: 0, left: 1, owner: 1),
-         Skystone(top: 2, right: 2, bottom: 1, left: 1, owner: 1),
-         Skystone(top: 1, right: 2, bottom: 1, left: 2, owner: 1)
-        ],
-        [Skystone(top: 2, right: 3, bottom: 1, left: 2, owner: 1),
-         Skystone(top: 3, right: 2, bottom: 1, left: 1, owner: 1),
-         Skystone(top: 2, right: 2, bottom: 2, left: 0, owner: 1),
-         Skystone(top: 1, right: 3, bottom: 3, left: 1, owner: 1),
-         Skystone(top: 2, right: 2, bottom: 3, left: 1, owner: 1)
-        ],
-        [Skystone(top: 2, right: 3, bottom: 2, left: 2, owner: 1),
-         Skystone(top: 3, right: 3, bottom: 1, left: 2, owner: 1),
-         Skystone(top: 3, right: 1, bottom: 3, left: 2, owner: 1),
-         Skystone(top: 2, right: 3, bottom: 2, left: 2, owner: 1),
-         Skystone(top: 1, right: 2, bottom: 3, left: 1, owner: 1)
-        ],
-        [Skystone(top: 3, right: 2, bottom: 3, left: 1, owner: 1),
-         Skystone(top: 2, right: 3, bottom: 3, left: 2, owner: 1),
-         Skystone(top: 4, right: 3, bottom: 2, left: 2, owner: 1),
-         Skystone(top: 1, right: 2, bottom: 3, left: 2, owner: 1),
-         Skystone(top: 2, right: 1, bottom: 4, left: 2, owner: 1)
-        ],
-        [Skystone(top: 3, right: 3, bottom: 3, left: 2, owner: 1),
-         Skystone(top: 1, right: 3, bottom: 4, left: 1, owner: 1),
-         Skystone(top: 2, right: 2, bottom: 3, left: 3, owner: 1),
-         Skystone(top: 3, right: 3, bottom: 3, left: 3, owner: 1),
-         Skystone(top: 2, right: 4, bottom: 4, left: 3, owner: 1)
-        ],
-        [Skystone(top: 3, right: 3, bottom: 4, left: 4, owner: 1),
-         Skystone(top: 4, right: 4, bottom: 4, left: 3, owner: 1),
-         Skystone(top: 3, right: 3, bottom: 3, left: 3, owner: 1),
-         Skystone(top: 4, right: 3, bottom: 3, left: 4, owner: 1),
-         Skystone(top: 3, right: 4, bottom: 3, left: 3, owner: 1)
-        ]
-    ]
+    private var player1PiecesForEachDifficulty: [[Skystone]]
+    
+    init() {
+        let piecesModel = PlayerPiecesModel()
+        self.player1Pieces = piecesModel.player1Pieces
+        self.player2Pieces = piecesModel.player2Pieces
+        self.level1Pieces = piecesModel.level1Pieces
+        self.level2Pieces = piecesModel.level2Pieces
+        self.level3Pieces = piecesModel.level3Pieces
+        self.level4Pieces = piecesModel.level4Pieces
+        self.level5Pieces = piecesModel.level5Pieces
+        self.level6Pieces = piecesModel.level6Pieces
+        self.player1PiecesForEachDifficulty = piecesModel.player1PiecesForEachDifficulty
+    }
     
     var selectedDifficulty: Int = 1
     
