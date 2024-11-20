@@ -201,27 +201,26 @@ class GameViewModel: ObservableObject {
         guard currentPlayer == 2, !isGameOver else { return }
         
         var bestMove: (index: Int, piece: Skystone)? = nil
-        var maxScoreDifference = Int.min
+        var maxScoreImpact = Int.min
         
-        // Loop through all available board positions
+        // Evaluate each possible move
         for (index, tile) in board.enumerated() where tile == nil {
-            // Try every piece in player2Pieces
             for piece in player2Pieces {
                 // Simulate placing the piece
                 var simulatedBoard = board
                 simulatedBoard[index] = piece
                 
-                // Simulate capturing opponent pieces
-                let capturedPieces = simulateCaptures(for: piece, at: index, on: simulatedBoard)
+                // Calculate immediate score impact (captured pieces)
+                let immediateCaptures = simulateCaptures(for: piece, at: index, on: simulatedBoard).count
                 
-                // Calculate score difference
-                let aiScore = simulatedBoard.filter { $0?.owner == 2 }.count
-                let playerScore = simulatedBoard.filter { $0?.owner == 1 }.count
-                let scoreDifference = aiScore - playerScore
+                // Simulate opponent's potential moves after this move
+                let opponentResponse = simulateOpponentBestMove(on: simulatedBoard)
                 
-                // Update the best move if this one is better
-                if scoreDifference > maxScoreDifference {
-                    maxScoreDifference = scoreDifference
+                // Aggressive strategy: prioritize moves with higher immediate gain and lower risk from opponent response
+                let scoreImpact = immediateCaptures - opponentResponse
+                
+                if scoreImpact > maxScoreImpact {
+                    maxScoreImpact = scoreImpact
                     bestMove = (index, piece)
                 }
             }
@@ -229,14 +228,29 @@ class GameViewModel: ObservableObject {
         
         // Execute the best move
         if let bestMove = bestMove {
-            // Set the selected piece for the computer
             selectedPiece = bestMove.piece
             placeSelectedPiece(at: bestMove.index)
             currentPlayer = 1
             updateScores()
         }
     }
-    
+
+    // Simulate opponent's best response to the current board state
+    private func simulateOpponentBestMove(on board: [Skystone?]) -> Int {
+        var worstCaseForAI = Int.min
+        for (index, tile) in board.enumerated() where tile == nil {
+            for piece in player1Pieces {
+                var simulatedBoard = board
+                simulatedBoard[index] = piece
+                
+                // Calculate the impact of the opponent's move
+                let captures = simulateCaptures(for: piece, at: index, on: simulatedBoard).count
+                worstCaseForAI = max(worstCaseForAI, captures)
+            }
+        }
+        return worstCaseForAI
+    }
+
     
     private func simulateCaptures(for piece: Skystone, at index: Int, on board: [Skystone?]) -> [Int] {
         let directions: [(offset: Int, checkIndex: Int)] = [
