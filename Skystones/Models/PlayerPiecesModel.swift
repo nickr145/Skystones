@@ -96,10 +96,10 @@ class PlayerPiecesModel: ObservableObject {
          Skystone(top: 3, right: 3, bottom: 3, left: 3, owner: 1),
          Skystone(top: 2, right: 4, bottom: 4, left: 3, owner: 1)
         ],
-        [Skystone(top: 3, right: 3, bottom: 4, left: 4, owner: 1),
+        [Skystone(top: 3, right: 3, bottom: 4, left: 3, owner: 1),
          Skystone(top: 4, right: 4, bottom: 4, left: 3, owner: 1),
          Skystone(top: 3, right: 3, bottom: 3, left: 3, owner: 1),
-         Skystone(top: 4, right: 3, bottom: 3, left: 4, owner: 1),
+         Skystone(top: 4, right: 3, bottom: 4, left: 3, owner: 1),
          Skystone(top: 3, right: 4, bottom: 3, left: 3, owner: 1)
         ]
     ]
