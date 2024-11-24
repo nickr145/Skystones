@@ -96,7 +96,7 @@ class GameViewModel: ObservableObject {
         case 5:
             Lvl5ComputerMove()  // MiniMax with Alpha-Beta pruning
         case 6:
-            Lvl5ComputerMove()
+            Lvl6ComputerMove()
         default:
             Lvl1ComputerMove()  // Default to level 1 if not specified
         }
@@ -198,57 +198,51 @@ class GameViewModel: ObservableObject {
     }
     
     func Lvl6ComputerMove() {
-        guard currentPlayer == 2, !isGameOver else { return }
+        let availableCells = board.indices.filter { board[$0] == nil }
+        guard !player2Pieces.isEmpty else { return }
         
-        var bestMove: (index: Int, piece: Skystone)? = nil
-        var maxScoreImpact = Int.min
+        var bestScore = Int.min
+        var bestMove: (cell: Int, piece: Skystone)?
         
-        // Evaluate each possible move
-        for (index, tile) in board.enumerated() where tile == nil {
+        for cell in availableCells {
             for piece in player2Pieces {
                 // Simulate placing the piece
-                var simulatedBoard = board
-                simulatedBoard[index] = piece
+                let simulatedScore = simulateMove(for: piece, at: cell)
                 
-                // Calculate immediate score impact (captured pieces)
-                let immediateCaptures = simulateCaptures(for: piece, at: index, on: simulatedBoard).count
+                // Look ahead: Simulate the opponent's best possible response
+                let opponentScore = simulateOpponentMove(for: piece, excluding: cell)
                 
-                // Simulate opponent's potential moves after this move
-                let opponentResponse = simulateOpponentBestMove(on: simulatedBoard)
+                // Net score prioritizes aggressive play while considering blocking Player 1
+                let netScore = simulatedScore - opponentScore
                 
-                // Aggressive strategy: prioritize moves with higher immediate gain and lower risk from opponent response
-                let scoreImpact = immediateCaptures - opponentResponse
-                
-                if scoreImpact > maxScoreImpact {
-                    maxScoreImpact = scoreImpact
-                    bestMove = (index, piece)
+                if netScore > bestScore {
+                    bestScore = netScore
+                    bestMove = (cell, piece)
                 }
             }
         }
         
-        // Execute the best move
+        // Perform the best move
         if let bestMove = bestMove {
             selectedPiece = bestMove.piece
-            placeSelectedPiece(at: bestMove.index)
-            currentPlayer = 1
-            updateScores()
+            placeSelectedPiece(at: bestMove.cell)
         }
     }
-
-    // Simulate opponent's best response to the current board state
-    private func simulateOpponentBestMove(on board: [Skystone?]) -> Int {
-        var worstCaseForAI = Int.min
-        for (index, tile) in board.enumerated() where tile == nil {
-            for piece in player1Pieces {
-                var simulatedBoard = board
-                simulatedBoard[index] = piece
-                
-                // Calculate the impact of the opponent's move
-                let captures = simulateCaptures(for: piece, at: index, on: simulatedBoard).count
-                worstCaseForAI = max(worstCaseForAI, captures)
+    
+    // simulation function needed for lvl6
+    func simulateOpponentMove(for piece: Skystone, excluding cell: Int) -> Int {
+        let availableCells = board.indices.filter { board[$0] == nil && $0 != cell }
+        var worstOutcome = 0
+        
+        for opponentCell in availableCells {
+            for opponentPiece in player1Pieces {
+                // Simulate Player 1's best response
+                let simulatedOpponentScore = simulateMove(for: opponentPiece, at: opponentCell)
+                worstOutcome = max(worstOutcome, simulatedOpponentScore)
             }
         }
-        return worstCaseForAI
+        
+        return worstOutcome
     }
 
     

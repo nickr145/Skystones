@@ -14,17 +14,18 @@ class AudioPlayerManager: ObservableObject {
     var audioPlayer: AVAudioPlayer!
     
     func playAudio(named fileName: String, fileType: String = "mp3") {
-        if let path = Bundle.main.path(forResource: fileName, ofType: fileType) {
-            let url = URL(fileURLWithPath: path)
-            
-            do {
-                audioPlayer = try? AVAudioPlayer(contentsOf: url)
-                audioPlayer?.play()
-            } catch {
-                print("Failed to initialize audio player: \(error)")
-            }
-        } else {
+        guard let url = Bundle.main.url(forResource: fileName, withExtension: fileType) else {
             print("Audio file not found.")
+            return
+        }
+        
+        do {
+            audioPlayer = try? AVAudioPlayer(contentsOf: url)
+            audioPlayer?.numberOfLoops = -1 // indefinite loops
+            audioPlayer?.prepareToPlay()
+            audioPlayer?.play()
+        } catch {
+            print("Failed to initialize audio player: \(error.localizedDescription)")
         }
     }
     
